@@ -4,8 +4,21 @@ import { sql } from './connect';
 type User = {
   id: number;
   username: string;
+  email: string;
   passwordHash: string;
 };
+
+export const getUserByUsernameWithEmail = cache(async (username: string) => {
+  const [user] = await sql<User[]>`
+    SELECT
+      *
+    FROM
+      users
+    WHERE
+      username = ${username}
+  `;
+  return user;
+});
 
 export const getUserByUsernameWithPasswordHash = cache(
   async (username: string) => {
@@ -22,10 +35,11 @@ export const getUserByUsernameWithPasswordHash = cache(
 );
 
 export const getUserByUsername = cache(async (username: string) => {
-  const [user] = await sql<{ id: number; username: string }[]>`
+  const [user] = await sql<{ id: number; username: string; email: string }[]>`
     SELECT
       id,
-      username
+      username,
+      email
     FROM
       users
     WHERE
@@ -35,15 +49,16 @@ export const getUserByUsername = cache(async (username: string) => {
 });
 
 export const createUser = cache(
-  async (username: string, passwordHash: string) => {
-    const [user] = await sql<{ id: number; username: string }[]>`
+  async (username: string, email: string, passwordHash: string) => {
+    const [user] = await sql<{ id: number; username: string; email: string }[]>`
       INSERT INTO users
-        (username, password_hash)
+        (username, email, password_hash)
       VALUES
-        (${username}, ${passwordHash})
+        (${username}, ${email}, ${passwordHash})
       RETURNING
         id,
-        username
+        username,
+        email
     `;
     return user;
   },

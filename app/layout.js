@@ -11,8 +11,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Link href="/register">register</Link>
-        <Link href="/login">login</Link>
+        {/* <Link href="/register">register</Link>
+        <Link href="/login">login</Link> */}
         {children}
       </body>
     </html>

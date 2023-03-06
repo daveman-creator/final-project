@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { RegisterResponseBody } from '../../api/(auth)/register/route';
@@ -7,6 +8,7 @@ import { RegisterResponseBody } from '../../api/(auth)/register/route';
 export default function RegisterForm(props: { returnTo?: string | string[] }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const [errors, setErrors] = useState<{ message: string }[]>([]);
   const router = useRouter();
 
@@ -17,7 +19,7 @@ export default function RegisterForm(props: { returnTo?: string | string[] }) {
 
         const response = await fetch('/api/register', {
           method: 'POST',
-          body: JSON.stringify({ username, password }),
+          body: JSON.stringify({ username, email, password }),
         });
 
         const data: RegisterResponseBody = await response.json();
@@ -43,11 +45,26 @@ export default function RegisterForm(props: { returnTo?: string | string[] }) {
       {errors.map((error) => (
         <div key={`error-${error.message}`}>Error: {error.message}</div>
       ))}
+
+      <Image
+        src="/image/Teacher.webp"
+        width="300"
+        height="300"
+        alt="Classroom"
+      />
+      <br />
       <label>
         username:
         <input
           value={username}
           onChange={(event) => setUsername(event.currentTarget.value)}
+        />
+      </label>
+      <label>
+        email:
+        <input
+          value={email}
+          onChange={(event) => setEmail(event.currentTarget.value)}
         />
       </label>
       <label>

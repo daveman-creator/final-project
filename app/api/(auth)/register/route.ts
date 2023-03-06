@@ -1,10 +1,15 @@
 import bcrypt from 'bcrypt';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { createUser, getUserByUsername } from '../../../../database/users';
+import {
+  createUser,
+  getUserByUsername,
+  getUserByUsernameWithEmail,
+} from '../../../../database/users';
 
 const userSchema = z.object({
   username: z.string(),
+  email: z.string(),
   password: z.string(),
 });
 
@@ -31,9 +36,9 @@ export const POST = async (request: NextRequest) => {
   }
 
   // check if the string is empty
-  if (!result.data.username || !result.data.password) {
+  if (!result.data.username || !result.data.email || !result.data.password) {
     return NextResponse.json(
-      { errors: [{ message: 'username or password is empty' }] },
+      { errors: [{ message: 'username, email or password is empty' }] },
       { status: 400 },
     );
   }
@@ -50,11 +55,23 @@ export const POST = async (request: NextRequest) => {
     );
   }
 
+  const email = await getUserByUsernameWithEmail(result.data.email);
+
+  if (email) {
+    return NextResponse.json(
+      { errors: [{ message: 'email is already taken' }] },
+      { status: 400 },
+    );
+  }
   // 3. hash the password
   const passwordHash = await bcrypt.hash(result.data.password, 12);
 
   // 4. create the user
-  const newUser = await createUser(result.data.username, passwordHash);
+  const newUser = await createUser(
+    result.data.username,
+    result.data.email,
+    passwordHash,
+  );
 
   if (!newUser) {
     return NextResponse.json(
@@ -64,5 +81,8 @@ export const POST = async (request: NextRequest) => {
   }
 
   // 5. return the new username
-  return NextResponse.json({ user: { username: newUser.username } });
+  return NextResponse.json(
+    { user: { username: newUser.username } },
+    { status: 200 },
+  );
 };

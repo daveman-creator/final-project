@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { RegisterResponseBody } from '../../api/(auth)/register/route';
@@ -7,6 +9,7 @@ import { RegisterResponseBody } from '../../api/(auth)/register/route';
 export default function LoginForm(props: { returnTo?: string | string[] }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  // const [email, setEmail] = useState('');
   const [errors, setErrors] = useState<{ message: string }[]>([]);
   const router = useRouter();
 
@@ -18,6 +21,7 @@ export default function LoginForm(props: { returnTo?: string | string[] }) {
         const response = await fetch('/api/login', {
           method: 'POST',
           body: JSON.stringify({ username, password }),
+          // email,
         });
 
         const data: RegisterResponseBody = await response.json();
@@ -37,12 +41,20 @@ export default function LoginForm(props: { returnTo?: string | string[] }) {
           return;
         }
 
+        // console.log(data.user);
         router.push(`/profile/${data.user.username}`);
       }}
     >
       {errors.map((error) => (
         <div key={`error-${error.message}`}>Error: {error.message}</div>
       ))}
+      <Image
+        src="/image/Teacher.webp"
+        width="300"
+        height="300"
+        alt="Classroom"
+      />
+      <br />
       <label>
         username:
         <input
@@ -50,6 +62,13 @@ export default function LoginForm(props: { returnTo?: string | string[] }) {
           onChange={(event) => setUsername(event.currentTarget.value)}
         />
       </label>
+      {/* <label>
+        email:
+        <input
+          value={email}
+          onChange={(event) => setEmail(event.currentTarget.value)}
+        />
+      </label> */}
       <label>
         password:
         <input
@@ -57,7 +76,16 @@ export default function LoginForm(props: { returnTo?: string | string[] }) {
           onChange={(event) => setPassword(event.currentTarget.value)}
         />
       </label>
+      <div>
+        {/* class="pass-link" */}
+        <Link href="/">Forgot password?</Link>
+      </div>
       <button>Login</button>
+
+      <div>
+        Not a member?
+        <Link href="/register">Register now</Link>
+      </div>
     </form>
   );
 }

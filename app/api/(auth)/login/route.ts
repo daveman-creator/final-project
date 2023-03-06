@@ -1,9 +1,14 @@
+import bcrypt from 'bcrypt';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { getUserByUsername } from '../../../../database/users';
+import {
+  getUserByUsername,
+  getUserByUsernameWithPasswordHash,
+} from '../../../../database/users';
 
 const userSchema = z.object({
   username: z.string(),
+  // email: z.string(),
   password: z.string(),
 });
 
@@ -31,6 +36,7 @@ export const POST = async (request: NextRequest) => {
 
   // check if the string is empty
   if (!result.data.username || !result.data.password) {
+    // || !result.data.email
     return NextResponse.json(
       { errors: [{ message: 'username or password is empty' }] },
       { status: 400 },
@@ -39,13 +45,39 @@ export const POST = async (request: NextRequest) => {
 
   // 2. check if the user already exist
   // 2.a compare the username with the database
+  const userByUsernameWithPasswordHash =
+    await getUserByUsernameWithPasswordHash(result.data.username);
 
-  const user = await getUserByUsername(result.data.username);
-
-  if (user) {
+  if (!userByUsernameWithPasswordHash) {
     return NextResponse.json(
-      { errors: [{ message: 'username is already taken' }] },
-      { status: 400 },
+      { errors: [{ message: 'user not found' }] },
+      { status: 401 },
     );
   }
+  console.log('userByUsernameWithPasswordHash', userByUsernameWithPasswordHash);
+  // 3. validate the password
+  const isPasswordValid = await bcrypt.compare(
+    result.data.password,
+    userByUsernameWithPasswordHash.passwordHash,
+  );
+
+  if (!isPasswordValid) {
+    return NextResponse.json(
+      { errors: [{ message: ' password is not valid' }] },
+      { status: 401 },
+    );
+  }
+
+  return NextResponse.json({
+    user: { username: userByUsernameWithPasswordHash.username },
+  });
+
+  // const user = await getUserByUsername(result.data.username);
+
+  // if (user) {
+  //   return NextResponse.json(
+  //     { errors: [{ message: 'username is already taken' }] },
+  //     { status: 400 },
+  //   );
+  // }
 };
