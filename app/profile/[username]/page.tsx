@@ -19,7 +19,7 @@ export default async function UserProfile({ params }: Props) {
       <p>email: {user.email}</p>
       <Image src="/image/Photo.png" width="80" height="80" alt="Classroom" />
       <br />
-      <TeacherInput />
+      <TeacherInput students={students} />
 
       {/* <label>
         Create Class:
