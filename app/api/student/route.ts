@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { createStudent } from '../../../database/students';
+import {
+  createStudent,
+  getStudentsByGradeId,
+} from '../../../database/students';
 
 // import { createStudent, Student } from '../../../database/users';
 
@@ -10,7 +13,7 @@ import { createStudent } from '../../../database/students';
 const studentSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
-  // gradeId: z.number(),
+  gradeId: z.number(),
   // csrfToken: z.string(),
 });
 
@@ -21,7 +24,7 @@ export type StudentsResponseBody =
 export const POST = async (request: NextRequest) => {
   // 1. validate the data
   const body = await request.json();
-
+  console.log('body', body);
   const result = studentSchema.safeParse(body);
 
   if (!result.success) {
@@ -43,9 +46,19 @@ export const POST = async (request: NextRequest) => {
     );
   }
 
+  // const students = await getStudentsByGradeId(result.data.gradeId);
+
+  // if (user) {
+  //   return NextResponse.json(
+  //     { errors: [{ message: 'student is already taken' }] },
+  //     { status: 400 },
+  //   );
+  // }
+
   const newStudent = await createStudent(
     result.data.firstName,
     result.data.lastName,
+    result.data.gradeId,
     // result.data.gradeId,gradeId || !result.data.gradeId
   );
   // console.log('newGrade', newGrade);

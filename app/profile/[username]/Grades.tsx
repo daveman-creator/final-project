@@ -84,7 +84,6 @@ export default function Grades(props: { userId: number }) {
           <br />
         </form>
       )}
-      ;
     </>
   );
 }

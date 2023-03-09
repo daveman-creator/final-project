@@ -2,9 +2,10 @@ export async function up(sql) {
   await sql`
     CREATE TABLE students (
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-      first_name varchar(80) NOT NULL,
+       grade_id integer REFERENCES grades(id),
+       first_name varchar(80) NOT NULL,
       last_name varchar(80) NOT NULL
-      -- grade_id integer REFERENCES grades(id) UNIQUE
+
 
     )
   `;

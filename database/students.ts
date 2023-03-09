@@ -6,7 +6,7 @@ export type Student = {
   id: number;
   firstName: string;
   lastName: string;
-  // gradeId: number;
+  gradeId: number;
 };
 
 // getStudentsByTeacherId
@@ -60,24 +60,37 @@ export type Student = {
 //   `;
 //   return student;
 // });
-export const getStudents = cache(async () => {
+export const getStudentsByGradeId = cache(async (gradeId: number) => {
   const students = await sql<Student[]>`
     SELECT
-     *
+      *
     FROM
       students
+      WHERE
+      grade_id = ${gradeId}
   `;
   return students;
 });
 
+// export const getStudents = cache(async () => {
+//   const [student] = await sql<Student[]>`
+//     SELECT
+//       *
+//     FROM
+//       students
+//   `;
+//   return student;
+// });
+
 export const getStudentsByStudentId = cache(async (studentId: number) => {
   const [student] = await sql<
-    { id: number; firstName: string; lastName: string }[]
+    { id: number; firstName: string; lastName: string; gradeId: number }[]
   >`
     SELECT
       id,
       first_name,
-      last_name
+      last_name,
+      grade_id
     FROM
       students
     WHERE
@@ -87,14 +100,14 @@ export const getStudentsByStudentId = cache(async (studentId: number) => {
 });
 
 export const createStudent = cache(
-  async (firstName: string, lastName: string) => {
+  async (firstName: string, lastName: string, gradeId: number) => {
     const [student] = await sql<
-      { id: number; firstName: string; lastName: string }[]
+      { id: number; firstName: string; lastName: string; gradeId: number }[]
     >`
       INSERT INTO students
-        (first_name, last_name)
+        (first_name, last_name, grade_id)
       VALUES
-        (${firstName}, ${lastName} )
+        (${firstName}, ${lastName}, ${gradeId})
       RETURNING
          *
 
@@ -102,4 +115,4 @@ export const createStudent = cache(
     return student;
   },
 );
-// ${gradeId}, grade_id, gradeId: number; gradeId: number
+// ${gradeId}, grade_id, gradeId: number;

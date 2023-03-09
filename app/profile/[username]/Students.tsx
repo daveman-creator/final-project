@@ -3,16 +3,18 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-// import { getStudents } from '../../../database/students';
+// import { StudentsResponseBody } from '../../api/student/route';
 
 type Student = {
   id: number;
   firstName: string;
   lastName: string;
+  gradeId: number;
 };
 
 type Props = {
   students: Student[];
+  gradeId: number;
 };
 
 export default function Students(props: Props) {
@@ -23,6 +25,8 @@ export default function Students(props: Props) {
   const [idOnEditMode, setIdOnEditMode] = useState<number>();
   const [editFirstName, setEditFirstName] = useState<string>('');
   const [editLastName, setEditLastName] = useState<string>('');
+  // const [errors, setErrors] = useState<{ message: string }[]>([]);
+  // const [gradeId, setGradeId] = useState<number>(0);
   const router = useRouter();
 
   // const students = await getStudents();
@@ -61,10 +65,18 @@ export default function Students(props: Props) {
                   'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
+                  gradeId: props.gradeId,
                   firstName: firstName,
                   lastName: lastName,
                 }),
               });
+
+              // const data: StudentsResponseBody = await response.json();
+
+              // if ('errors' in data) {
+              //   setErrors(data.errors);
+              //   return;
+              // }
 
               const data = await response.json();
               if (data.error) {
