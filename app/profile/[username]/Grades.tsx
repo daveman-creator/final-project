@@ -1,6 +1,6 @@
 'use client';
 
-// import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { GradesResponseBody } from '../../api/grade/route';
 
@@ -10,17 +10,7 @@ export default function Grades(props: { userId: number }) {
   const [gradeCode, setGradeCode] = useState('');
   const [showInput, setShowInput] = useState(false);
   const [errors, setErrors] = useState<{ message: string }[]>([]);
-
-  // const [idOnEditMode, setIdOnEditMode] = useState<number>();
-  // const [firstName, setFirstName] = useState<string>('');
-  // const [lastName, setLastName] = useState<string>('');
-  // const [editFirstName, setEditFirstName] = useState<string>('');
-  // const [editLastName, setEditLastName] = useState<string>('');
-  // const [error, setError] = useState<string>();
-
-  // userId: number;
-  // gradeName: string;
-  // gradeCode: string;
+  const router = useRouter();
 
   return (
     <>
@@ -46,20 +36,7 @@ export default function Grades(props: { userId: number }) {
               setErrors(data.errors);
               return;
             }
-            // console.log('data', data);
-
-            // if (
-            //   props.returnTo &&
-            //   !Array.isArray(props.returnTo) &&
-            //   // This is checking that the return to is a valid path in your application and not going to a different domain
-            //   /^\/[a-zA-Z0-9-?=/]*$/.test(props.returnTo)
-            // ) {
-            //   router.push(props.returnTo);
-            //   return;
-            // }
-
-            // console.log(data.user);
-            // router.push(`/profile/${data.grades.grade}`);
+            router.refresh();
           }}
         >
           <label>
@@ -71,7 +48,6 @@ export default function Grades(props: { userId: number }) {
             />
           </label>
           {/* <button>Create</button> */}
-
           <label>
             Generate Grade Code:
             <input
@@ -81,6 +57,7 @@ export default function Grades(props: { userId: number }) {
             />
           </label>
           <button>Create</button>
+          {/* router.refresh(); */}
           <br />
         </form>
       )}

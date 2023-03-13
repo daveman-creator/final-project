@@ -1,0 +1,28 @@
+.form {
+  max-width: 428px; /* set the maximum width to the iPhone 14 Max Pro's screen width */
+  margin: 0 auto; /* center the content horizontally */
+  padding: 20px; /* add some padding to the content */
+  // border: 50px;
+  // border-radius: 20px;
+}
+
+.button {
+  display: block; /* make the buttons full width */
+  width: 100%;
+  margin-bottom: 10px; /* add some space between the buttons */
+  padding: 10px 20px; /* add some padding to the buttons */
+  font-size: 18px; /* set the font size */
+  background-color: #007aff; /* set the background color */
+  color: #fff; /* set the text color */
+  border: none; /* remove the border */
+  border-radius: 8px; /* add some rounded corners */
+}
+
+.button:hover {
+  background-color: #0056b3; /* change the background color on hover */
+}
+.hr {
+  margin: 20px 0; /* add some space above and below the horizontal lines */
+  border: none; /* remove the border */
+  border-top: 1px solid #ccc; /* add a light gray line */
+}

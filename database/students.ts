@@ -60,6 +60,42 @@ export type Student = {
 //   `;
 //   return student;
 // });
+
+// export const getSByUsernameWithPasswordHash = cache(
+//   async (username: string) => {
+//     const [user] = await sql<User[]>`
+//     SELECT
+//       *
+//     FROM
+//       users
+//     WHERE
+//       username = ${username}
+//   `;
+//     return user;
+//   },
+// );
+// sql<Student[]>`
+export const getStudentByFirstNameAndLastNameWithGradeCode = cache(
+  async (firstName: string, lastName: string, gradeCode: string) => {
+    const [student] = await sql<
+      { id: number; firstName: string; lastName: string; gradeCode: string }[]
+    >`
+      SELECT
+        id,
+        first_name,
+        last_name,
+        grade_code
+      FROM
+        students
+      WHERE
+        first_name = ${firstName}
+        AND last_name = ${lastName}
+        AND grade_id = ${gradeCode}
+    `;
+    return student;
+  },
+);
+
 export const getStudentsByGradeId = cache(async (gradeId: number) => {
   const students = await sql<Student[]>`
     SELECT
@@ -82,21 +118,69 @@ export const getStudentsByGradeId = cache(async (gradeId: number) => {
 //   return student;
 // });
 
-export const getStudentsByStudentId = cache(async (studentId: number) => {
-  const [student] = await sql<
-    { id: number; firstName: string; lastName: string; gradeId: number }[]
-  >`
+// export const getStudentsByStudentId = cache(async (studentId: number) => {
+//   const [student] = await sql<
+//     { id: number; firstName: string; lastName: string; gradeId: number }[]
+//   >`
+//     SELECT
+//       id,
+//       first_name,
+//       last_name,
+//       grade_id
+//     FROM
+//       students
+//     WHERE
+//       id = ${studentId}
+//   `;
+//   return student;
+// });
+
+export const updateStudentById = cache(
+  async (id: number, firstName: string, lastName: string, gradeId: number) => {
+    const [student] = await sql<Student[]>`
+      UPDATE
+        students
+      SET
+        first_name = ${firstName},
+        last_name = ${lastName},
+        grade_id = ${gradeId}
+      WHERE
+        id = ${id}
+      RETURNING *
+    `;
+    return student;
+  },
+);
+
+export const deleteStudentById = cache(async (id: number) => {
+  const [student] = await sql<Student[]>`
+    DELETE FROM
+      students
+    WHERE
+      id = ${id}
+    RETURNING *
+  `;
+  return student;
+});
+
+export const getStudentById = cache(async (id: number) => {
+  const [student] = await sql<Student[]>`
     SELECT
-      id,
-      first_name,
-      last_name,
-      grade_id
+      *
     FROM
       students
     WHERE
-      id = ${studentId}
+      id = ${id}
   `;
   return student;
+});
+
+export const getStudents = cache(async () => {
+  const students = await sql<Student[]>`
+    SELECT * FROM students
+  `;
+
+  return students;
 });
 
 export const createStudent = cache(
@@ -112,7 +196,11 @@ export const createStudent = cache(
          *
 
     `;
-    return student;
+    if (student) {
+      return student;
+    } else {
+      throw new Error('Unable to create student');
+    }
+    // return student;
   },
 );
-// ${gradeId}, grade_id, gradeId: number;

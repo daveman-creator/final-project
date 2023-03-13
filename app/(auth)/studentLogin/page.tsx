@@ -1,11 +1,11 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { getValidSessionByToken } from '../../../database/sessions';
-import RegisterForm from './RegisterForm';
+import StudentLoginForm from './StudentLoginForm';
 
 type Props = { searchParams: { returnTo?: string | string[] } };
 
-export default async function RegisterPage(props: Props) {
+export default async function StudentLoginPage(props: Props) {
   // check if I have a valid session
   const sessionTokenCookie = cookies().get('sessionToken');
   const session =
@@ -17,5 +17,7 @@ export default async function RegisterPage(props: Props) {
   //   redirect('/profile/[username]');
   // }
 
-  return <RegisterForm returnTo={props.searchParams.returnTo} />;
+  // if I don't, show the login form
+
+  return <StudentLoginForm returnTo={props.searchParams.returnTo} />;
 }

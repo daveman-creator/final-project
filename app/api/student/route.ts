@@ -3,6 +3,7 @@ import { z } from 'zod';
 import {
   createStudent,
   getStudentsByGradeId,
+  Student,
 } from '../../../database/students';
 
 // import { createStudent, Student } from '../../../database/users';
@@ -14,6 +15,7 @@ const studentSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
   gradeId: z.number(),
+  // studentId: z.number(),
   // csrfToken: z.string(),
 });
 
@@ -21,10 +23,18 @@ export type StudentsResponseBody =
   | { errors: { message: string }[] }
   | { students: { student: string } };
 
+// export type StudentResponseBodyDelete =
+//   | {
+//       error: string;
+//     }
+//   | {
+//       student: Student;
+//     };
+
 export const POST = async (request: NextRequest) => {
   // 1. validate the data
   const body = await request.json();
-  console.log('body', body);
+  // console.log('body', body);
   const result = studentSchema.safeParse(body);
 
   if (!result.success) {
@@ -46,15 +56,6 @@ export const POST = async (request: NextRequest) => {
     );
   }
 
-  // const students = await getStudentsByGradeId(result.data.gradeId);
-
-  // if (user) {
-  //   return NextResponse.json(
-  //     { errors: [{ message: 'student is already taken' }] },
-  //     { status: 400 },
-  //   );
-  // }
-
   const newStudent = await createStudent(
     result.data.firstName,
     result.data.lastName,
@@ -65,6 +66,66 @@ export const POST = async (request: NextRequest) => {
 
   return NextResponse.json({ students: newStudent });
 };
+
+// export const DELETE = async (request: NextRequest) => {
+//   // const body = await request.json();
+//   const studentId = await request.json();
+
+//   const result = studentSchema.safeParse(studentId);
+
+//   if (!result.success) {
+//     // Inside of result.error.issues you are going to have more granular information about what is failing allowing you to create more specific error massages
+
+//     return NextResponse.json(
+//       {
+//         errors: result.error.issues,
+//       },
+//       { status: 400 },
+//     );
+//   }
+
+//   const singleStudent = await deleteStudentById(studentId);
+//   if (!singleStudent) {
+//     return NextResponse.json(
+//       {
+//         error: 'Student not found',
+//       },
+//       { status: 404 },
+//     );
+//   }
+
+//   return NextResponse.json({ student: singleStudent });
+// };
+
+// export async function DELETE(
+//   request: NextRequest,
+//   { params }: { params: Record<string, string | string[]> },
+// ) {
+//   // : Promise<NextResponse<StudentResponseBodyDelete>>
+//   const studentId = Number(params.studentId);
+
+//   if (!studentId) {
+//     return NextResponse.json(
+//       {
+//         error: 'Student id is not valid',
+//       },
+//       { status: 400 },
+//     );
+//   }
+
+//   const singleStudent = await deleteStudentById(studentId);
+
+//   if (!singleStudent) {
+//     return NextResponse.json(
+//       {
+//         error: 'Student not found',
+//       },
+//       { status: 404 },
+//     );
+//   }
+
+//   return NextResponse.json({ student: singleStudent });
+// }
 
 // export type StudentsResponseBodyGet =
 //   | {

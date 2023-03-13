@@ -4,12 +4,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { RegisterResponseBody } from '../../api/(auth)/register/route';
+import { StudentsResponseBody } from '../../api/(auth)/studentLogin/route';
 import styles from './page.module.scss';
 
-export default function LoginForm(props: { returnTo?: string | string[] }) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+// props: { returnTo?: string | string[] }
+
+export default function StudentLoginForm(props: {
+  returnTo?: string | string[];
+}) {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [gradeCode, setGradeCode] = useState('');
   // const [email, setEmail] = useState('');
   const [errors, setErrors] = useState<{ message: string }[]>([]);
   const router = useRouter();
@@ -20,13 +25,13 @@ export default function LoginForm(props: { returnTo?: string | string[] }) {
       onSubmit={async (event) => {
         event.preventDefault();
 
-        const response = await fetch('/api/login', {
+        const response = await fetch('/api/studentLogin', {
           method: 'POST',
-          body: JSON.stringify({ username, password }),
+          body: JSON.stringify({ firstName, lastName, gradeCode }),
           // email,
         });
 
-        const data: RegisterResponseBody = await response.json();
+        const data: StudentsResponseBody = await response.json();
 
         if ('errors' in data) {
           setErrors(data.errors);
@@ -43,7 +48,7 @@ export default function LoginForm(props: { returnTo?: string | string[] }) {
           return;
         }
 
-        router.push(`/profile/${data.user.username}`);
+        router.push(`/post/${data.user.userId}`);
         // router.refresh();
         // router.replace(`/profile/${data.user.username}`);
         // router.refresh();
@@ -61,10 +66,10 @@ export default function LoginForm(props: { returnTo?: string | string[] }) {
       <br />
       <hr className={styles.hr} />
       <label>
-        username:
+        FirstName:
         <input
-          value={username}
-          onChange={(event) => setUsername(event.currentTarget.value)}
+          value={firstName}
+          onChange={(event) => setFirstName(event.currentTarget.value)}
         />
       </label>
       <hr className={styles.hr} />
@@ -76,10 +81,18 @@ export default function LoginForm(props: { returnTo?: string | string[] }) {
         />
       </label> */}
       <label>
-        password:
+        LastName:
         <input
-          value={password}
-          onChange={(event) => setPassword(event.currentTarget.value)}
+          value={lastName}
+          onChange={(event) => setLastName(event.currentTarget.value)}
+        />
+      </label>
+      <hr className={styles.hr} />
+      <label>
+        GradeCode:
+        <input
+          value={gradeCode}
+          onChange={(event) => setGradeCode(event.currentTarget.value)}
         />
       </label>
       <hr className={styles.hr} />
@@ -88,11 +101,6 @@ export default function LoginForm(props: { returnTo?: string | string[] }) {
         <Link href="/">Forgot password?</Link>
       </div>
       <button className={styles.button}>Login</button>
-
-      <div>
-        Don't have an account?
-        <Link href="/register">Register now</Link>
-      </div>
     </form>
   );
 }

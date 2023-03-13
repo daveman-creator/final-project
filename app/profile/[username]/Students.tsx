@@ -2,8 +2,14 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-
-// import { StudentsResponseBody } from '../../api/student/route';
+// import { Student } from '../../../database/students';
+import { StudentsResponseBody } from '../../api/student/route';
+// import {
+//   StudentResponseBodyDelete,
+//   StudentResponseBodyPut,
+// } from '../../api/students/[studentId]/route';
+import Grades from './Grades';
+import styles from './page.module.scss';
 
 type Student = {
   id: number;
@@ -11,10 +17,10 @@ type Student = {
   lastName: string;
   gradeId: number;
 };
-
+// | undefined;
 type Props = {
-  students: Student[];
-  gradeId: number;
+  students?: Student[];
+  gradeId?: number;
 };
 
 export default function Students(props: Props) {
@@ -25,6 +31,7 @@ export default function Students(props: Props) {
   const [idOnEditMode, setIdOnEditMode] = useState<number>();
   const [editFirstName, setEditFirstName] = useState<string>('');
   const [editLastName, setEditLastName] = useState<string>('');
+  // const [editGradeId, setEditGradeId] = useState<number>();
   // const [errors, setErrors] = useState<{ message: string }[]>([]);
   // const [gradeId, setGradeId] = useState<number>(0);
   const router = useRouter();
@@ -94,9 +101,10 @@ export default function Students(props: Props) {
       )}
 
       <div>
-        {/* props.students */}
+        {/* props.students &&
+          props.students.map((student) */}
 
-        {props.students.map((student) => (
+        {props.students?.map((student) => (
           <div key={`student-${student.id}`}>
             {idOnEditMode !== student.id ? (
               student.firstName
@@ -122,9 +130,16 @@ export default function Students(props: Props) {
 
             <button
               onClick={async () => {
-                const response = await fetch(`/api/student/${student.id}`, {
+                const response = await fetch(`/api/students/${student.id}`, {
                   method: 'DELETE',
                 });
+
+                // const data: StudentResponseBodyDelete = await response.json();
+
+                // if ('errors' in data) {
+                //   setErrors(data.errors);
+                //   return;
+                // }
                 const data = await response.json();
                 if (data.error) {
                   setError(data.error);
@@ -140,6 +155,7 @@ export default function Students(props: Props) {
               <button
                 onClick={() => {
                   setIdOnEditMode(student.id);
+                  // setEditGradeId(student.gradeId);
                   setEditFirstName(student.firstName);
                   setEditLastName(student.lastName);
                 }}
@@ -149,16 +165,25 @@ export default function Students(props: Props) {
             ) : (
               <button
                 onClick={async () => {
-                  const response = await fetch(`/api/student/${student.id}`, {
+                  const response = await fetch(`/api/students/${student.id}`, {
                     method: 'PUT',
                     headers: {
                       'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
+                      // gradeId: props.editGradeId,.gradeId,
+                      gradeId: props.gradeId,
                       firstName: editFirstName,
                       lastName: editLastName,
                     }),
                   });
+
+                  // const data: StudentResponseBodyPut = await response.json();
+
+                  // if ('errors' in data) {
+                  //   setErrors(data.errors);
+                  //   return;
+                  // }
                   const data = await response.json();
                   if (data.error) {
                     setError(data.error);

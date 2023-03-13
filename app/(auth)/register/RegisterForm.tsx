@@ -40,6 +40,9 @@ export default function RegisterForm(props: { returnTo?: string | string[] }) {
         }
 
         router.push(`/profile/${data.user.username}`);
+
+        // router.replace(`/profile/${data.user.username}`);
+        // router.refresh();
       }}
     >
       {errors.map((error) => (

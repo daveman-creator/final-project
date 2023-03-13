@@ -1,10 +1,13 @@
+import crypto from 'node:crypto';
 import bcrypt from 'bcrypt';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { createSession } from '../../../../database/sessions';
 import {
   getUserByUsername,
   getUserByUsernameWithPasswordHash,
 } from '../../../../database/users';
+import { createSerializedRegisterSessionTokenCookie } from '../../../../utils/cookies';
 
 const userSchema = z.object({
   username: z.string(),
@@ -24,7 +27,6 @@ export const POST = async (request: NextRequest) => {
 
   if (!result.success) {
     // Inside of result.error.issues you are going to have more granular information about what is failing allowing you to create more specific error massages
-
 
     return NextResponse.json(
       {
@@ -68,9 +70,35 @@ export const POST = async (request: NextRequest) => {
     );
   }
 
-  return NextResponse.json({
-    user: { username: userByUsernameWithPasswordHash.username },
-  });
+  // 4. create a session
+  // - create the token
+  const token = crypto.randomBytes(80).toString('base64');
+  // - create a session token
+  const session = await createSession(token, userByUsernameWithPasswordHash.id);
+
+  // - store the session token in the database
+  if (!session) {
+    return NextResponse.json(
+      { errors: [{ message: 'session creation failed' }] },
+      { status: 500 },
+    );
+  }
+  // - Attach the session token to the response
+  // - serialize the cookie
+  const serializedCookie = createSerializedRegisterSessionTokenCookie(
+    session.token,
+  );
+  // - add the new header
+
+  return NextResponse.json(
+    {
+      user: { username: userByUsernameWithPasswordHash.username },
+    },
+    {
+      status: 200,
+      headers: { 'Set-Cookie': serializedCookie },
+    },
+  );
 
   // const user = await getUserByUsername(result.data.username);
 
