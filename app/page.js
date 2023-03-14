@@ -8,6 +8,7 @@ export default function Home() {
     <main className={styles.main}>
       <div className={styles.div}>School App</div>
       <Image
+        className={styles.image}
         src="/image/Schoolpage.jpg"
         width="400"
         height="400"

@@ -7,6 +7,7 @@ export async function up(sql) {
       last_name varchar(80) NOT NULL
 
 
+
     )
   `;
 }

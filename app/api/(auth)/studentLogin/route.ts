@@ -3,11 +3,10 @@ import bcrypt from 'bcrypt';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createSession } from '../../../../database/sessions';
-import { getStudentByFirstNameAndLastNameWithGradeCode } from '../../../../database/students';
-// import {
-//   getUserByUsername,
-//   getUserByUsernameWithPasswordHash,
-// } from '../../../../database/users';
+import {
+  getStudentByFirstNameAndLastNameWithGradeCode,
+  getStudentByGradeCode,
+} from '../../../../database/students';
 import { createSerializedRegisterSessionTokenCookie } from '../../../../utils/cookies';
 
 const studentSchema = z.object({
@@ -18,13 +17,14 @@ const studentSchema = z.object({
 
 export type StudentsResponseBody =
   | { errors: { message: string }[] }
-  | { student: { student: string } };
+  | { student: { firstName: string; lastName: string } };
 
 export const POST = async (request: NextRequest) => {
   // 1. validate the data
   const body = await request.json();
 
   const result = studentSchema.safeParse(body);
+  console.log('result', result);
 
   if (!result.success) {
     // Inside of result.error.issues you are going to have more granular information about what is failing allowing you to create more specific error massages
@@ -54,44 +54,67 @@ export const POST = async (request: NextRequest) => {
 
   // 2.a compare the username with the database
   // getStudentByFirstNameAndLastNameWithGradeCode
+  // confirm that the gradecode is valid and it belongs to the student that is making the request
 
-  const studentByFirstNameAndLastNameWithGradeCode =
-    await getStudentByFirstNameAndLastNameWithGradeCode(
-      result.data.firstName,
-      result.data.lastName,
-      result.data.gradeCode,
-    );
+  // const studentByGradeCode = await getStudentByGradeCode();
 
-  if (!studentByFirstNameAndLastNameWithGradeCode) {
-    return NextResponse.json(
-      { errors: [{ message: 'student not found' }] },
-      { status: 401 },
-    );
-  }
-  console.log(
-    'studentByFirstNameAndLastNameWithGradeCode',
-    studentByFirstNameAndLastNameWithGradeCode,
-  );
-
-  // const userByUsernameWithPasswordHash =
-  //   await getUserByUsernameWithPasswordHash(result.data.username);
-
-  // if (!userByUsernameWithPasswordHash) {
+  // if (!studentByGradeCode || !studentByGradeCode.firstName || !studentByGradeCode.lastName) {
   //   return NextResponse.json(
-  //     { errors: [{ message: 'user not found' }] },
+  //     { errors: [{ message: 'student is not valid' }] },
   //     { status: 401 },
   //   );
   // }
-  // console.log('userByUsernameWithPasswordHash', userByUsernameWithPasswordHash);
-  // // 3. validate the password
-  // const isPasswordValid = await bcrypt.compare(
-  //   result.data.password,
-  //   userByUsernameWithPasswordHash.passwordHash,
+
+  // console.log('studentByGradeCode', studentByGradeCode);
+
+  //  this is the main code
+  const studentByGradeCode = await getStudentByGradeCode(result.data.gradeCode);
+  //  result.data.firstName,
+  //   result.data.lastName,
+
+  if (!studentByGradeCode) {
+    return NextResponse.json(
+      { errors: [{ message: 'student is not valid' }] },
+      { status: 401 },
+    );
+  }
+  console.log('studentByGradeCode', studentByGradeCode);
+
+  // const isFirstNameValid = await getStudentByGradeCode(result.data.firstName);
+
+  // if (!isFirstNameValid) {
+  //   return NextResponse.json(
+  //     { errors: [{ message: ' firstName is not valid' }] },
+  //     { status: 401 },
+  //   );
+  // }
+
+  // const isLastNameValid = await getStudentByGradeCode(result.data.lastName);
+
+  // if (!isLastNameValid) {
+  //   return NextResponse.json(
+  //     { errors: [{ message: ' LastName is not valid' }] },
+  //     { status: 401 },
+  //   );
+  // }
+
+  const isGradeCodeValid = await getStudentByGradeCode(result.data.gradeCode);
+
+  if (!isGradeCodeValid) {
+    return NextResponse.json(
+      { errors: [{ message: ' gradeCode is not valid' }] },
+      { status: 401 },
+    );
+  }
+
+  // const isGradeCodeValid = await bcrypt.compare(
+  //   result.data.gradeCode,
+  //   studentByGradeCode.gradeCode,
   // );
 
-  // if (!isPasswordValid) {
+  // if (!isGradeCodeValid) {
   //   return NextResponse.json(
-  //     { errors: [{ message: ' password is not valid' }] },
+  //     { errors: [{ message: ' gradeCode is not valid' }] },
   //     { status: 401 },
   //   );
   // }
@@ -100,10 +123,7 @@ export const POST = async (request: NextRequest) => {
   // - create the token
   const token = crypto.randomBytes(80).toString('base64');
   // - create a session token
-  const session = await createSession(
-    token,
-    studentByFirstNameAndLastNameWithGradeCode.id,
-  );
+  const session = await createSession(token, studentByGradeCode.id);
 
   // - store the session token in the database
   if (!session) {
@@ -122,9 +142,8 @@ export const POST = async (request: NextRequest) => {
   return NextResponse.json(
     {
       student: {
-        studentLogin:
-          studentByFirstNameAndLastNameWithGradeCode.firstName.lastName
-            .gradeCode,
+        firstName: studentByGradeCode.firstName,
+        lastName: studentByGradeCode.lastName,
       },
     },
     {

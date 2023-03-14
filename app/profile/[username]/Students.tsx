@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 // import { Student } from '../../../database/students';
-import { StudentsResponseBody } from '../../api/student/route';
+// import { StudentsResponseBody } from '../../api/student/route';
 // import {
 //   StudentResponseBodyDelete,
 //   StudentResponseBodyPut,
