@@ -68,7 +68,10 @@ export const POST = async (request: NextRequest) => {
   // console.log('studentByGradeCode', studentByGradeCode);
 
   //  this is the main code
-  const studentByGradeCode = await getStudentByGradeCode(result.data.gradeCode);
+  const studentByGradeCode = await getStudentByGradeCode(
+    result.data.gradeCode,
+    result.data.firstName,
+  );
   //  result.data.firstName,
   //   result.data.lastName,
 
@@ -98,14 +101,14 @@ export const POST = async (request: NextRequest) => {
   //   );
   // }
 
-  const isGradeCodeValid = await getStudentByGradeCode(result.data.gradeCode);
+  // const isGradeCodeValid = await getStudentByGradeCode(result.data.gradeCode);
 
-  if (!isGradeCodeValid) {
-    return NextResponse.json(
-      { errors: [{ message: ' gradeCode is not valid' }] },
-      { status: 401 },
-    );
-  }
+  // if (!isGradeCodeValid) {
+  //   return NextResponse.json(
+  //     { errors: [{ message: ' gradeCode is not valid' }] },
+  //     { status: 401 },
+  //   );
+  // }
 
   // const isGradeCodeValid = await bcrypt.compare(
   //   result.data.gradeCode,

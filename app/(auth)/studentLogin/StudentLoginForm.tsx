@@ -49,8 +49,11 @@ export default function StudentLoginForm(props: {
             router.push(props.returnTo);
             return;
           }
+
+          router.push(`/post`);
           // router.push(`/post/${data.gradeId.gradeId}`);
           // router.push(`/post/${data.user.userId}`);
+
           // router.refresh();
           // router.replace(`/profile/${data.user.username}`);
           // router.refresh();

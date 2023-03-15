@@ -2,7 +2,7 @@
 import { cookies } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getPostsByUserId } from '../../database/posts';
+import { getPostByPostId, getPostsByUserId } from '../../database/posts';
 import { getUserBySessionToken, getUserByUsername } from '../../database/users';
 import styles from './page.module.scss';
 import Posts from './Posts';
@@ -22,6 +22,8 @@ export default async function PostPage(props: Props) {
     : await getUserBySessionToken(sessionToken.value);
 
   const posts = user && (await getPostsByUserId(user.id));
+  // const post = posts && (await getPostByPostId(posts.id));
+  // console.log(post.id);
   // const post = await getPostsByUserId(user.id);
   // console.log(user);
 
