@@ -2,8 +2,16 @@
 import { cookies } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getPostByPostId, getPostsByUserId } from '../../database/posts';
-import { getUserBySessionToken, getUserByUsername } from '../../database/users';
+import {
+  getPostByPostId,
+  getPostsByUserId,
+  getTeacherNameByStudentName,
+} from '../../../../database/posts';
+import { getStudentBySessionToken } from '../../../../database/students';
+import {
+  getUserBySessionToken,
+  getUserByUsername,
+} from '../../../../database/users';
 import styles from './page.module.scss';
 import Posts from './Posts';
 
@@ -17,11 +25,39 @@ export default async function PostPage(props: Props) {
 
   // 2. validate that session
   // 3. get the user profile matching the session
+  const student = 'ggg';
+  console.log('sessionToken', sessionToken);
+
+  // const student = !sessionToken?.value
+  //   ? undefined
+  //   : await getStudentBySessionToken(sessionToken.value);
+
   const user = !sessionToken?.value
     ? undefined
     : await getUserBySessionToken(sessionToken.value);
+  console.log('user', user);
 
-  const posts = user && (await getPostsByUserId(user.id));
+  const teacher = await getTeacherNameByStudentName('Peter', 'Blue');
+  console.log('teacher', teacher);
+  let posts;
+
+  if (user) {
+    posts = await getPostsByUserId(user.id);
+    console.log('posts', posts);
+  }
+  if (teacher) {
+    posts = await getPostsByUserId(teacher.userId);
+    console.log('posts', posts);
+  }
+
+  // posts = user && (await getPostsByUserId(user.id));
+  // console.log('posts', posts);
+
+  // const student = !sessionToken?.value
+  //   ? undefined
+  //   : await getStudentBySessionToken(sessionToken.value);
+  // console.log(student);
+
   // const post = posts && (await getPostByPostId(posts.id));
   // console.log(post.id);
   // const post = await getPostsByUserId(user.id);

@@ -20,7 +20,7 @@ export default async function UserProfile({ params }: Props) {
   }
 
   return (
-    <main>
+    <main className={styles.main}>
       <h1>Welcome {user.username}</h1>
       <p>id: {user.id} </p>
       <p>email: {user.email}</p>
@@ -30,10 +30,16 @@ export default async function UserProfile({ params }: Props) {
       <br />
       <h1>Grades</h1>
       <Grades userId={user.id} />
-      {/* <Student gradeId={grade?.id} student={student} /> */}
-      <Students gradeId={grade?.id} students={students} />
-      <Link href="/post">
-        <button className={styles.button}>Post Page</button>
+      <br />
+      <Image
+        src="/image/Teamwork.jpg"
+        width="430"
+        height="300"
+        alt="Class Group Picture"
+      />
+      <br />
+      <Link href={`/profile/${user.username}/student`}>
+        <button>Students Page</button>
       </Link>
     </main>
   );

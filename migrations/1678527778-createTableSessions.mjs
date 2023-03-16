@@ -4,7 +4,9 @@ export async function up(sql) {
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
       token varchar(110) NOT NULL UNIQUE,
       expiry_timestamp timestamp NOT NULL DEFAULT NOW() +  INTERVAL '24 hours',
-      user_id integer REFERENCES users (id) ON DELETE CASCADE
+      user_id integer REFERENCES users (id) ON DELETE CASCADE,
+      student_id integer REFERENCES students (id) ON DELETE CASCADE
+
 
     )
   `;

@@ -94,8 +94,33 @@ export type Student = {
 //   return user;
 // });
 
+export const getStudentBySessionToken = cache(async (token: string) => {
+  const [student] = await sql<
+    { id: number; firstName: string; lastName: string; gradeId: number }[]
+  >`
+    SELECT
+      students.id,
+      students.first_name,
+      students.last_name,
+      students.grade_id
+    FROM
+      students
+    INNER JOIN
+      sessions ON (
+        sessions.token = ${token} AND
+        sessions.student_id = students.id AND
+        sessions.expiry_timestamp > now()
+      )
+  `;
+  return student;
+});
+
 export const getStudentByGradeCode = cache(
-  async (gradeCode: string, studentFirstName: string) => {
+  async (
+    gradeCode: string,
+    studentFirstName: string,
+    studentLastName: string,
+  ) => {
     const [student] = await sql<
       { id: number; firstName: string; lastName: string; gradeCode: string }[]
     >`
@@ -111,7 +136,7 @@ export const getStudentByGradeCode = cache(
         grades.grade_code = ${gradeCode} AND
         grades.id = students.grade_id
 
-      ) WHERE students.first_name = ${studentFirstName}
+      ) WHERE students.first_name = ${studentFirstName} AND students.last_name = ${studentLastName}
   `;
     return student;
   },

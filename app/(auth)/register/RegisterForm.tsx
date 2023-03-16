@@ -57,7 +57,7 @@ export default function RegisterForm(props: { returnTo?: string | string[] }) {
           className={styles.image}
           src="/image/Teacher.webp"
           width="400"
-          height="400"
+          height="350"
           alt="Classroom"
         />
         <br />
@@ -89,7 +89,7 @@ export default function RegisterForm(props: { returnTo?: string | string[] }) {
         <Link className={styles.Link} href="/">
           Back
         </Link>
-        <br />
+
         <br />
         <button className={styles.button}>Register</button>
       </form>

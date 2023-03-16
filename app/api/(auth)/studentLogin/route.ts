@@ -71,6 +71,7 @@ export const POST = async (request: NextRequest) => {
   const studentByGradeCode = await getStudentByGradeCode(
     result.data.gradeCode,
     result.data.firstName,
+    result.data.lastName,
   );
   //  result.data.firstName,
   //   result.data.lastName,

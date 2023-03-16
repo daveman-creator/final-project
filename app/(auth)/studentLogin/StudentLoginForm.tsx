@@ -49,10 +49,10 @@ export default function StudentLoginForm(props: {
             router.push(props.returnTo);
             return;
           }
-
-          router.push(`/post`);
+          // router.push(`/profile/${data.user.username}/post`);
+          router.push('/profile/Csaba/post');
           // router.push(`/post/${data.gradeId.gradeId}`);
-          // router.push(`/post/${data.user.userId}`);
+          // router.push(`/post/${data.user.username}`);
 
           // router.refresh();
           // router.replace(`/profile/${data.user.username}`);
@@ -67,7 +67,7 @@ export default function StudentLoginForm(props: {
           className={styles.image}
           src="/image/Teacher.webp"
           width="400"
-          height="400"
+          height="350"
           alt="Classroom"
         />
         <br />

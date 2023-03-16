@@ -86,7 +86,7 @@ FROM
   INNER JOIN students ON students.grade_id = grades.id
 WHERE
 // posts.id = 12;
-//   posts.id = ${id}
+
 
   students.user_id = ${currentUserId}
   AND posts.user_id = ${targetUserId}
@@ -95,6 +95,28 @@ WHERE
   },
 );
 
+export const getTeacherNameByStudentName = cache(
+  async (studentFirstName: string, studentLastName: string) => {
+    const [user] = await sql<{ id: number }[]>`
+  SELECT
+  users.username,
+   users.id As user_id
+from
+  users
+INNER JOIN
+  grades ON grades.user_id = users.id
+INNER JOIN
+  students ON students.grade_id = grades.id
+WHERE
+ students.first_name = ${studentFirstName} AND students.last_name = ${studentLastName};
+
+  `;
+    console.log('user from querry', user);
+    return user;
+  },
+);
+
+//   posts.id = ${id}
 // posts.id = 12;
 // students.grade_id = 1
 // AND posts.user_id = 5

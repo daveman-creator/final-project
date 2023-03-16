@@ -2,7 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { PostsResponseBody } from '../api/post/route';
+import { PostsResponseBody } from '../../../api/post/route';
+import styles from './page.module.scss';
 
 type Post = {
   id: number;
@@ -28,7 +29,7 @@ export default function Posts(props: Props) {
   // console.log(props);
 
   return (
-    <>
+    <main className={styles.main}>
       {!showInput && <button onClick={() => setShowInput(true)}>Create</button>}
       {showInput && (
         <form
@@ -137,49 +138,6 @@ export default function Posts(props: Props) {
           </div>
         ))}
       </div>
-    </>
+    </main>
   );
 }
-
-// const handleDeletePost = async (postId: number) => {
-//     const response = await fetch(`/api/post/${postId}`, {
-//       method: 'DELETE',
-//     });
-
-//     const data = await response.json();
-//     if (data.error) {
-//       setError(data.error);
-//       return;
-//     }
-
-//     router.refresh();
-//   };
-
-//   const handleEditPost = async (postId: number, updatedPost: Post) => {
-//     const response = await fetch(`/api/post/${postId}`, {
-//       method: 'PATCH',
-//       body: JSON.stringify(updatedPost),
-//     });
-
-//     const data = await response.json();
-
-//     if (data.error) {
-//       setError(data.error);
-//       return;
-//     }
-
-//     router.refresh();
-//   };
-
-// <button onClick={() => handleDeletePost(post.id)}>Delete</button>
-// <button
-//   onClick={() =>
-//     handleEditPost(post.id, {
-//       ...post,
-//       title: 'New Title',
-//       content: 'New Content',
-//     })
-//   }
-// >
-//   Edit
-// </button>
