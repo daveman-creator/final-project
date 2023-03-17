@@ -12,6 +12,7 @@ import {
   getUserBySessionToken,
   getUserByUsername,
 } from '../../../../database/users';
+import Comments from '../../../comment/Comments';
 import styles from './page.module.scss';
 import Posts from './Posts';
 
@@ -25,19 +26,23 @@ export default async function PostPage(props: Props) {
 
   // 2. validate that session
   // 3. get the user profile matching the session
-  const student = 'ggg';
-  console.log('sessionToken', sessionToken);
+  // const student = 'ggg';
+  // console.log('sessionToken', sessionToken);
 
-  // const student = !sessionToken?.value
-  //   ? undefined
-  //   : await getStudentBySessionToken(sessionToken.value);
+  const student = !sessionToken?.value
+    ? undefined
+    : await getStudentBySessionToken(sessionToken.value);
+  console.log('student', student);
 
   const user = !sessionToken?.value
     ? undefined
     : await getUserBySessionToken(sessionToken.value);
   console.log('user', user);
 
-  const teacher = await getTeacherNameByStudentName('Peter', 'Blue');
+  const teacher = await getTeacherNameByStudentName(
+    student?.firstName,
+    student?.lastName,
+  );
   console.log('teacher', teacher);
   let posts;
 
@@ -70,6 +75,7 @@ export default async function PostPage(props: Props) {
   return (
     <main>
       <Posts userId={user?.id} posts={posts} />
+      <Comments />
       {/* <p> Post content: {posts?.content}</p> */}
       {/* <p>{post.title}</p> */}
     </main>

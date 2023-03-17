@@ -14,8 +14,8 @@ type Comment = {
 
 type Props = {
   comments?: Comment[];
-  userId?: number;
-  studentId?: number;
+  // userId?: number;
+  // studentId?: number;
   postId?: number;
 };
 // { userId: number }
@@ -23,6 +23,7 @@ export default function Posts(props: Props) {
   // const router = useRouter;
   // const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  // const [comments, setComments] = useState<Comment[]>([]);
   const [showInput, setShowInput] = useState(false);
   const [error, setError] = useState<string>();
   // const [errors, setErrors] = useState<{ message: string }[]>([]);
@@ -31,7 +32,9 @@ export default function Posts(props: Props) {
 
   return (
     <main>
-      {!showInput && <button onClick={() => setShowInput(true)}>Create</button>}
+      {!showInput && (
+        <button onClick={() => setShowInput(true)}>Tab to add a comment</button>
+      )}
       {showInput && (
         <form
           onSubmit={async (event) => {
@@ -40,19 +43,12 @@ export default function Posts(props: Props) {
             const response = await fetch('/api/comment', {
               method: 'POST',
               body: JSON.stringify({
-                userId: props.userId,
-                studentId: props.studentId,
+                // userId: props.userId,
+                // studentId: props.studentId,
                 postId: props.postId,
                 content,
               }),
             });
-
-            // const data: PostsResponseBody = await response.json();
-
-            // if ('errors' in data) {
-            //   setErrors(data.errors);
-            //   return;
-            // }
 
             const data = await response.json();
             if (data.error) {
@@ -77,7 +73,7 @@ export default function Posts(props: Props) {
               placeholder="Post Content"
               onChange={(event) => setPostContent(event.currentTarget.value)} */}
           </label>
-          <button>Create</button>
+          <button>Add a Comment</button>
           <br />
         </form>
       )}

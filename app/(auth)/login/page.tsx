@@ -12,9 +12,9 @@ export default async function LoginPage(props: Props) {
     sessionTokenCookie &&
     (await getValidSessionByToken(sessionTokenCookie.value));
   // if I do, redirect to the profile page
-  // if (session) {
-  //   // redirect('/login');
-  //   redirect('/profile/[username]');
+  // if (!session) {
+  //   redirect('/studentLogin');
+  //   // redirect('/profile/[username]');
   // }
 
   // if I don't, show the login form

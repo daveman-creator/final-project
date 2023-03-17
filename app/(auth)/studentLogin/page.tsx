@@ -1,8 +1,12 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { getTeacherNameByStudentName } from '../../../database/posts';
 import { getValidSessionByToken } from '../../../database/sessions';
+import { getStudentBySessionToken } from '../../../database/students';
 import { getUserBySessionToken } from '../../../database/users';
 import StudentLoginForm from './StudentLoginForm';
+
+console.log('running');
 
 type Props = { searchParams: { returnTo?: string | string[] } };
 
@@ -16,16 +20,33 @@ export default async function StudentLoginPage(props: Props) {
   const cookieStore = cookies();
   const sessionToken = cookieStore.get('sessionToken');
 
+  const student = !sessionToken?.value
+    ? undefined
+    : await getStudentBySessionToken(sessionToken.value);
+  console.log('student', student);
+
   const user = !sessionToken?.value
     ? undefined
     : await getUserBySessionToken(sessionToken.value);
+  console.log('user', user);
+
+  const teacher = await getTeacherNameByStudentName(
+    student?.firstName,
+    student?.lastName,
+  );
+  console.log('teacher backend', teacher);
   // if I do, redirect to the profile page
   // if (session) {
-  //   // redirect('/login');
-  //   redirect('/profile/[username]');
+  //   redirect('/studentLogin');
+  //   // redirect('/profile/[username]');
   // }
 
   // if I don't, show the login form
 
-  return <StudentLoginForm returnTo={props.searchParams.returnTo} />;
+  return (
+    <StudentLoginForm
+      returnTo={props.searchParams.returnTo}
+      username={teacher?.username}
+    />
+  );
 }

@@ -2,12 +2,14 @@
 import { cookies } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getPostsByUserId } from '../../database/posts';
+import { getStudentBySessionToken } from '../../database/students';
 import { getUserBySessionToken } from '../../database/users';
 import Comments from './Comments';
 
 // type Props = { params: { username: string } };
 export const dynamic = 'force-dynamic';
-
+// props: Props
 export default async function PostPage(props: Props) {
   // const user = await getUserByUsername(params.username);
   const cookieStore = cookies();
@@ -15,16 +17,16 @@ export default async function PostPage(props: Props) {
 
   // 2. validate that session
   // 3. get the user profile matching the session
-  // const user = !sessionToken?.value
-  //   ? undefined
-  //   : await getUserBySessionToken(sessionToken.value);
-  // // console.log(user);
-  // const posts = user && (await getPostsByUserId(user.id));
+  const user = !sessionToken?.value
+    ? undefined
+    : await getUserBySessionToken(sessionToken.value);
+  console.log(user);
+  const posts = user && (await getPostsByUserId(user.id));
 
-  // const student = !sessionToken?.value
-  //   ? undefined
-  //   : await getStudentBySessionToken(sessionToken.value);
-  // console.log(student);
+  const student = !sessionToken?.value
+    ? undefined
+    : await getStudentBySessionToken(sessionToken.value);
+  console.log(student);
 
   // if (!user) {
   //   notFound();
@@ -32,7 +34,9 @@ export default async function PostPage(props: Props) {
 
   return (
     <main>
-      <Comments/>
+      <Comments />
+      <p>{props.userId}</p>
+      <p>{props.studentId}</p>
       {/* <Comments userId={user?.id} comments={comments} /> */}
       {/* <p> Post content: {posts?.content}</p> */}
       {/* <p>{post.title}</p> */}

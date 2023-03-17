@@ -25,11 +25,11 @@ export default async function StudentsPage({ params }: Props) {
 
   return (
     <main className={styles.main}>
-      <h1>Welcome {user.username}</h1>
-      <p> Grade Name: {grade?.gradeName}</p>
+      <h1 className={styles.h1}>Welcome {user.username}</h1>
+      <p className={styles.h1}> Grade Name: {grade?.gradeName}</p>
 
       <Students gradeId={grade?.id} students={students} />
-      {/* <Link href={`/Student/${user.id}`}> */}
+
       <Link href={`/profile/${user.username}/post`}>
         <button>Post Page</button>
       </Link>

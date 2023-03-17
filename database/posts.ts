@@ -1,6 +1,12 @@
 import { cache } from 'react';
 import { sql } from './connect';
 
+export type Post = {
+  id: number;
+  title: string;
+  content: string;
+};
+
 export const createPost = cache(
   async (title: string, content: string, userId: number) => {
     const [post] = await sql<{ id: number; title: string; content: string }[]>`
@@ -47,6 +53,23 @@ export const getPostsByUserId = cache(async (userId: number) => {
   return post;
 });
 //  posts.user_id = ${userId}
+
+export const updatePostById = cache(
+  async (id: number, title: string, content: string) => {
+    const [post] = await sql<{ id: number; title: string; content: string }[]>`
+      UPDATE
+        posts
+      SET
+        title = ${title},
+        content = ${content}
+
+      WHERE
+        id = ${id}
+      RETURNING *
+    `;
+    return post;
+  },
+);
 
 export const deletePostById = cache(async (id: number) => {
   const [post] = await sql<{ id: number; title: string; content: string }[]>`

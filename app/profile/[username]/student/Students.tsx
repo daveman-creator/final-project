@@ -39,9 +39,9 @@ export default function Students(props: Props) {
   // const students = await getStudents();
 
   return (
-    <main>
+    <main className={styles.main}>
       <div>
-        <h1>Students</h1>
+        <h1 className={styles.h1}>Students</h1>
         {!showInput && (
           <button onClick={() => setShowInput(true)}>Add Students</button>
         )}
@@ -50,6 +50,7 @@ export default function Students(props: Props) {
             <label>
               First Name:
               <input
+                className={styles.input}
                 value={firstName}
                 placeholder="First Name"
                 onChange={(event) => setFirstName(event.currentTarget.value)}
@@ -59,6 +60,7 @@ export default function Students(props: Props) {
             <label>
               Last Name:
               <input
+                className={styles.input}
                 value={lastName}
                 placeholder="Last Name"
                 onChange={(event) => setLastName(event.currentTarget.value)}
@@ -111,6 +113,7 @@ export default function Students(props: Props) {
                 student.firstName
               ) : (
                 <input
+                  className={styles.input2}
                   value={editFirstName}
                   onChange={(event) =>
                     setEditFirstName(event.currentTarget.value)
@@ -123,6 +126,7 @@ export default function Students(props: Props) {
                 student.lastName
               ) : (
                 <input
+                  className={styles.input2}
                   value={editLastName}
                   onChange={(event) =>
                     setEditLastName(event.currentTarget.value)
@@ -132,6 +136,7 @@ export default function Students(props: Props) {
               {''}
 
               <button
+                className={styles.delete}
                 onClick={async () => {
                   const response = await fetch(`/api/students/${student.id}`, {
                     method: 'DELETE',
@@ -156,6 +161,7 @@ export default function Students(props: Props) {
               </button>
               {idOnEditMode !== student.id ? (
                 <button
+                  className={styles.edit}
                   onClick={() => {
                     setIdOnEditMode(student.id);
                     // setEditGradeId(student.gradeId);
@@ -167,6 +173,7 @@ export default function Students(props: Props) {
                 </button>
               ) : (
                 <button
+                  className={styles.save}
                   onClick={async () => {
                     const response = await fetch(
                       `/api/students/${student.id}`,

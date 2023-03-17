@@ -11,6 +11,7 @@ import styles from './page.module.scss';
 
 export default function StudentLoginForm(props: {
   returnTo?: string | string[];
+  username: string;
 }) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -50,12 +51,12 @@ export default function StudentLoginForm(props: {
             return;
           }
           // router.push(`/profile/${data.user.username}/post`);
-          router.push('/profile/Csaba/post');
+          router.push(`/profile/${props.username}/post`);
           // router.push(`/post/${data.gradeId.gradeId}`);
           // router.push(`/post/${data.user.username}`);
 
           // router.refresh();
-          // router.replace(`/profile/${data.user.username}`);
+          // router.replace(`/profile/${data.user.username}/post`);
           // router.refresh();
         }}
       >

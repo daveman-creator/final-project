@@ -7,6 +7,22 @@ type Session = {
   token: string;
 };
 
+export const createStudentSession = cache(
+  async (token: string, studentId: number) => {
+    const [session] = await sql<{ id: number; token: string }[]>`
+      INSERT INTO sessions
+        (token, student_id)
+      VALUES
+        (${token}, ${studentId})
+      RETURNING
+        id,
+        token
+    `;
+    await deleteExpiredSessions();
+    return session;
+  },
+);
+
 export const createSession = cache(async (token: string, userId: number) => {
   const [session] = await sql<{ id: number; token: string }[]>`
       INSERT INTO sessions

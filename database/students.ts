@@ -10,99 +10,15 @@ export type Student = {
   gradeId: number;
 };
 
-// getStudentsByTeacherId
-
-// export const getStudentsByTeacherId = cache(async (username: string) => {
-//   const [user] = await sql<{ id: number; username: string; email: string }[]>`
-//     SELECT
-//       id,
-//       username,
-//       email
-//     FROM
-//       users
-//     WHERE
-//       username = ${username}
-//   `;
-//   return user;
-// });
-
-// export const getStudentsByUserId = cache(async (userId: number) => {
-//   const [student] = await sql<
-//     { id: number; firstName: string; lastName: string; gradeId: number }[]
-//   >`
-//     SELECT
-//       id,
-//       first_name,
-//       last_name,
-//       grade_id
-//     FROM
-//       users
-//     WHERE
-//       user_id = ${userId}
-//   `;
-//   return student;
-// });
-
-// et students with user id
-
-// export const getStudentsByGradeId = cache(async (gradeId: number) => {
-//   const [student] = await sql<
-//     { id: number; firstName: string; lastName: string; gradeId: number }[]
-//   >`
-//     SELECT
-//       id,
-//       first_name,
-//       last_name,
-//       grade_id
-//     FROM
-//       users
-//     WHERE
-//       grade_id = ${gradeId}
-//   `;
-//   return student;
-// });
-
-// export const getSByUsernameWithPasswordHash = cache(
-//   async (username: string) => {
-//     const [user] = await sql<User[]>`
-//     SELECT
-//       *
-//     FROM
-//       users
-//     WHERE
-//       username = ${username}
-//   `;
-//     return user;
-//   },
-// );
-// sql<Student[]>`
-
-// export const getUserBySessionToken = cache(async (token: string) => {
-//   const [user] = await sql<{ id: number; username: string }[]>`
-//     SELECT
-//       users.id,
-//       users.username
-//     FROM
-//       users
-//     INNER JOIN
-//       sessions ON (
-//         sessions.token = ${token} AND
-//         sessions.user_id = users.id AND
-//         sessions.expiry_timestamp > now()
-//       )
-//   `;
-//   return user;
-// });
-
 export const getStudentBySessionToken = cache(async (token: string) => {
   const [student] = await sql<
-    { id: number; firstName: string; lastName: string; gradeId: number }[]
+    { id: number; firstName: string; lastName: string }[]
   >`
     SELECT
       students.id,
       students.first_name,
-      students.last_name,
-      students.grade_id
+      students.last_name
+
     FROM
       students
     INNER JOIN
@@ -125,9 +41,13 @@ export const getStudentByGradeCode = cache(
       { id: number; firstName: string; lastName: string; gradeCode: string }[]
     >`
     SELECT
+    students.id,
     students.first_name,
     students.last_name,
-    grades.grade_code
+    grades.grade_code,
+    students.grade_id
+
+
 
     FROM
       students
@@ -174,33 +94,6 @@ export const getStudentsByGradeId = cache(async (gradeId: number) => {
   `;
   return students;
 });
-
-// export const getStudents = cache(async () => {
-//   const [student] = await sql<Student[]>`
-//     SELECT
-//       *
-//     FROM
-//       students
-//   `;
-//   return student;
-// });
-
-// export const getStudentsByStudentId = cache(async (studentId: number) => {
-//   const [student] = await sql<
-//     { id: number; firstName: string; lastName: string; gradeId: number }[]
-//   >`
-//     SELECT
-//       id,
-//       first_name,
-//       last_name,
-//       grade_id
-//     FROM
-//       students
-//     WHERE
-//       id = ${studentId}
-//   `;
-//   return student;
-// });
 
 export const updateStudentById = cache(
   async (id: number, firstName: string, lastName: string, gradeId: number) => {
