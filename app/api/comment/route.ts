@@ -61,32 +61,32 @@ export const POST = async (request: NextRequest) => {
 //   return NextResponse.json({ comments });
 // };
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: Record<string, string | string[]> },
-): Promise<NextResponse<CommentResponseBodyGet>> {
-  const commentId = Number(params.commentId);
-  console.log(params);
+// export async function GET(
+//   request: NextRequest,
+//   { params }: { params: Record<string, string | string[]> },
+// ): Promise<NextResponse<CommentResponseBodyGet>> {
+//   const commentId = Number(params.commentId);
+//   console.log(params);
 
-  if (!commentId) {
-    return NextResponse.json(
-      {
-        error: 'Comment id is not valid',
-      },
-      { status: 400 },
-    );
-  }
+//   if (!commentId) {
+//     return NextResponse.json(
+//       {
+//         error: 'Comment id is not valid',
+//       },
+//       { status: 400 },
+//     );
+//   }
 
-  const singleComment = await getCommentById(commentId);
+//   const singleComment = await getCommentById(commentId);
 
-  if (!singleComment) {
-    return NextResponse.json(
-      {
-        error: 'Comment not found',
-      },
-      { status: 404 },
-    );
-  }
+//   if (!singleComment) {
+//     return NextResponse.json(
+//       {
+//         error: 'Comment not found',
+//       },
+//       { status: 404 },
+//     );
+//   }
 
-  return NextResponse.json({ comment: singleCooment });
-}
+//   return NextResponse.json({ comment: singleCooment });
+// }

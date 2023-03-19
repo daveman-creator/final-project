@@ -42,8 +42,11 @@ export default function Students(props: Props) {
     <main className={styles.main}>
       <div>
         <h1 className={styles.h1}>Students</h1>
+
         {!showInput && (
-          <button onClick={() => setShowInput(true)}>Add Students</button>
+          <button className={styles.button} onClick={() => setShowInput(true)}>
+            Add Students
+          </button>
         )}
         {showInput && (
           <>
@@ -68,6 +71,7 @@ export default function Students(props: Props) {
             </label>
 
             <button
+              className={styles.button}
               onClick={async () => {
                 const response = await fetch('/api/student', {
                   method: 'POST',
@@ -99,6 +103,12 @@ export default function Students(props: Props) {
               }}
             >
               Add Students
+            </button>
+            <button
+              className={styles.button2}
+              onClick={() => setShowInput(false)}
+            >
+              X
             </button>
           </>
         )}
@@ -157,7 +167,7 @@ export default function Students(props: Props) {
                   router.refresh();
                 }}
               >
-                X
+                <img src="/image/Trash.png" width={20} height={20} alt="" />
               </button>
               {idOnEditMode !== student.id ? (
                 <button

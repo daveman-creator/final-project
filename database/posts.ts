@@ -17,7 +17,8 @@ export const createPost = cache(
       RETURNING
         id,
         title,
-        content
+        content,
+        created_at
     `;
     return post;
   },

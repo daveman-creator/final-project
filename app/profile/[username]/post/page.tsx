@@ -2,8 +2,9 @@
 import { cookies } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getCommentsByPostId } from '../../../../database/comments';
+import { getGradesByUserId } from '../../../../database/grades';
 import {
-  getPostByPostId,
   getPostsByUserId,
   getTeacherNameByStudentName,
 } from '../../../../database/posts';
@@ -21,6 +22,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function PostPage(props: Props) {
   // const user = await getUserByUsername(params.username);
+  // const grade = user && (await getGradesByUserId(user.id));
   const cookieStore = cookies();
   const sessionToken = cookieStore.get('sessionToken');
 
@@ -39,6 +41,8 @@ export default async function PostPage(props: Props) {
     : await getUserBySessionToken(sessionToken.value);
   console.log('user', user);
 
+  const grade = user && (await getGradesByUserId(user.id));
+
   const teacher = await getTeacherNameByStudentName(
     student?.firstName,
     student?.lastName,
@@ -54,7 +58,7 @@ export default async function PostPage(props: Props) {
     posts = await getPostsByUserId(teacher.userId);
     console.log('posts', posts);
   }
-
+  const comments = posts && (await getCommentsByPostId(posts.id));
   // posts = user && (await getPostsByUserId(user.id));
   // console.log('posts', posts);
 
@@ -73,9 +77,15 @@ export default async function PostPage(props: Props) {
   // }
 
   return (
-    <main>
+    <main className={styles.main}>
+      <h1 className={styles.h1}>Posts</h1>
+      <p className={styles.p}> {grade?.gradeName}</p>
       <Posts userId={user?.id} posts={posts} />
-      <Comments />
+      {/* <Comments postId={posts?.id} comments={comments} /> */}
+
+      {/* <Comments userId={user?.id} comments={comments} /> */}
+      {/* <Comments postId={posts.id} /> */}
+      {/* <Comments /> */}
       {/* <p> Post content: {posts?.content}</p> */}
       {/* <p>{post.title}</p> */}
     </main>

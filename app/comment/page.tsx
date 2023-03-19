@@ -2,6 +2,7 @@
 import { cookies } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getCommentsByPostId } from '../../database/comments';
 import { getPostsByUserId } from '../../database/posts';
 import { getStudentBySessionToken } from '../../database/students';
 import { getUserBySessionToken } from '../../database/users';
@@ -10,8 +11,9 @@ import Comments from './Comments';
 // type Props = { params: { username: string } };
 export const dynamic = 'force-dynamic';
 // props: Props
-export default async function PostPage(props: Props) {
+export default async function CommentPage(props: Props) {
   // const user = await getUserByUsername(params.username);
+
   const cookieStore = cookies();
   const sessionToken = cookieStore.get('sessionToken');
 
@@ -22,7 +24,7 @@ export default async function PostPage(props: Props) {
     : await getUserBySessionToken(sessionToken.value);
   console.log(user);
   const posts = user && (await getPostsByUserId(user.id));
-
+  const comments = posts && (await getCommentsByPostId(posts.id));
   const student = !sessionToken?.value
     ? undefined
     : await getStudentBySessionToken(sessionToken.value);
@@ -37,6 +39,12 @@ export default async function PostPage(props: Props) {
       <Comments />
       <p>{props.userId}</p>
       <p>{props.studentId}</p>
+      <p>{props.postId}</p>
+      <p>{props.content}</p>
+      <p>{props.comments}</p>
+      <Comments postId={posts?.id} comments={comments} />
+      {/* <Comments comments={comments} /> */}
+
       {/* <Comments userId={user?.id} comments={comments} /> */}
       {/* <p> Post content: {posts?.content}</p> */}
       {/* <p>{post.title}</p> */}

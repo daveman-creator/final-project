@@ -1,5 +1,6 @@
 'use client';
 
+import { FormatColorReset } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 import { comment } from 'postcss';
 import { useState } from 'react';
@@ -26,6 +27,8 @@ export default function Posts(props: Props) {
   const [content, setContent] = useState('');
   const [showInput, setShowInput] = useState(false);
   const [error, setError] = useState<string>();
+  const [comments, setComments] = useState<Comment[]>([]);
+  // const [hideInput, setHideInput] = useState(false);
   // const [idOnEditMode, setIdOnEditMode] = useState<number>();
   // const [editTitle, setEditTitle] = useState<string>('');
   // const [editContent, setEditContent] = useState<string>('');
@@ -35,7 +38,7 @@ export default function Posts(props: Props) {
 
   return (
     <main className={styles.main}>
-      <h1 className={styles.h1}>Posts</h1>
+      {/* <h1 className={styles.h1}>Posts</h1> */}
       {!showInput && (
         <button className={styles.button} onClick={() => setShowInput(true)}>
           Create
@@ -98,7 +101,14 @@ export default function Posts(props: Props) {
               placeholder="Post Content"
               onChange={(event) => setPostContent(event.currentTarget.value)} */}
           </label>
+
           <button className={styles.button}>Create</button>
+          <button
+            className={styles.button2}
+            onClick={() => setShowInput(false)}
+          >
+            X
+          </button>
           <br />
         </form>
       )}
@@ -109,10 +119,9 @@ export default function Posts(props: Props) {
             <h1>{post.title}</h1>
             <p>{post.content}</p>
             {/* <Comments /> */}
-            {/* <p>{post.userId}</p> */}
-            {/* <p>{Comments.content}</p> */}
-            {/* <p>{comment.content}</p> */}
             <Comments postId={post.id} />
+
+            {/* <p>{comment.content}</p> */}
 
             {/* {idOnEditMode !== post.id ? (
               post.title

@@ -19,7 +19,7 @@ type Props = {
   postId?: number;
 };
 // { userId: number }
-export default function Posts(props: Props) {
+export default function Comments(props: Props) {
   // const router = useRouter;
   // const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
