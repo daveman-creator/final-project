@@ -33,6 +33,9 @@ export default async function StudentsPage({ params }: Props) {
       <Link href={`/profile/${user.username}/post`}>
         <button className={styles.button}> Post Page</button>
       </Link>
+      <Link className={styles.Link} href={`/profile/${user.username}`}>
+        Back
+      </Link>
     </main>
   );
 }

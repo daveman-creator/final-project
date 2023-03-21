@@ -9,6 +9,7 @@ import { createGrade } from '../../../database/grades';
 
 const gradeSchema = z.object({
   userId: z.number(),
+  imageUrl: z.string(),
   gradeName: z.string(),
   gradeCode: z.string(),
   // csrfToken: z.string(),
@@ -44,6 +45,7 @@ export const POST = async (request: NextRequest) => {
   }
   const newGrade = await createGrade(
     result.data.userId,
+    result.data.imageUrl,
     result.data.gradeName,
     result.data.gradeCode,
   );

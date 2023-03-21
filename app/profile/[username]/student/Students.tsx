@@ -60,6 +60,7 @@ export default function Students(props: Props) {
               />
             </label>
             {''}
+            <br />
             <label>
               Last Name:
               <input

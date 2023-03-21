@@ -1,63 +1,209 @@
-.main {
-  width: 428px;
-  height: 850px;
-  // max-width: 428px;
-  // max-height: 850px; /* set the maximum width to the iPhone 14 Max Pro's screen width */
-  margin: 0 auto; /* center the content horizontally */
-  padding: 20px; /* add some padding to the content */
-  background-color: #773030;
-  // border: 50px;
-  // border-color: black;
-  border-radius: 20px;
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
+/* Mobile styles */
+@media screen and (max-width: 480px) {
+  .main {
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #773030;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .div {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .button {
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: #007aff;
+    color: #fff;
+    border-radius: 8px;
+  }
+
+  .button:hover {
+    background-color: #0056b3;
+  }
 }
 
-.div {
-  display: flex; /* make the div a flex container */
-  // flex-direction: column; /* make the flex items stack vertically */
-  align-items: center; /* center the flex items horizontally */
-  justify-content: center; /* center the flex items vertically */
-  font-size: 30px;
-  font-weight: bold;
-  margin-bottom: 20px;
+/* Tablet styles */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .main {
+    min-height: 100vh;
+    padding: 30px;
+    background-color: #773030;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .div {
+    font-size: 32px;
+    margin-bottom: 30px;
+  }
+
+  .button {
+    font-size: 20px;
+    padding: 15px 30px;
+    background-color: #007aff;
+    color: #fff;
+    border-radius: 8px;
+  }
+
+  .button:hover {
+    background-color: #0056b3;
+  }
 }
 
-.image {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  margin-left: -6px;
-  // width: 100px;
-  // height: 100px;
-  // border-radius: 50%;
-  // margin-bottom: 20px;
-}
-.link {
-  text-decoration: none;
-}
-.button {
-  display: block; /* make the buttons full width */
-  width: 100%;
-  margin-bottom: 10px; /* add some space between the buttons */
-  padding: 10px 20px; /* add some padding to the buttons */
-  font-size: 18px; /* set the font size */
-  background-color: #007aff; /* set the background color */
-  color: #fff; /* set the text color */
-  border: none; /* remove the border */
-  border-radius: 8px; /* add some rounded corners */
+/* Desktop styles */
+@media screen and (min-width: 769px) {
+  .main {
+    min-height: 100vh;
+    padding: 40px;
+    background-color: #773030;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .div {
+    font-size: 48px;
+    margin-bottom: 40px;
+  }
+
+  .button {
+    font-size: 18px;
+    padding: 20px 40px;
+    background-color: #007aff;
+    color: #fff;
+    border-radius: 8px;
+  }
+
+  .button:hover {
+    background-color: #0056b3;
+  }
 }
 
-.button:hover {
-  background-color: #0056b3; /* change the background color on hover */
-}
+// /* page.module.scss */
+// $desktop-width: 1024px;
+// $tablet-width: 768px;
+// $mobile-width: 480px;
 
-.hr {
-  margin: 20px 0; /* add some space above and below the horizontal lines */
-  border: none; /* remove the border */
-  border-top: 1px solid #ccc; /* add a light gray line */
-}
+// /* styles for desktop screens */
+// @media (min-width: $desktop-width) {
+//   /* add styles here */
+//   .main {
+//     width: 100%;
+//     min-height: 100vh;
+//     max-width: $desktop-width;
+//     background-color: #773030;
+//     margin: 0 auto;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//   }
+// }
+
+// /* styles for tablet screens */
+// @media (max-width: $desktop-width) and (min-width: $tablet-width) {
+//   /* add styles here */
+//   .main {
+//     width: 100%;
+//     min-height: 100vh;
+//     max-width: $tablet-width;
+//     background-color: #773030;
+//     margin: 0 auto;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//   }
+// }
+
+// /* styles for mobile screens */
+// @media (max-width: $tablet-width) {
+//   /* add styles here */
+//   .main {
+//     width: 100%;
+//     min-height: 100vh;
+//     background-color: #773030;
+//     max-width: $mobile-width;
+//     margin: 0 auto;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//   }
+// }
+
+// .button {
+//   background-color: #007aff;
+// }
+
+// .main {
+//   width: 100%;
+//   min-height: 100vh;
+// width: 428px;
+// height: 850px;
+// max-width: 428px;
+// // max-height: 850px; /* set the maximum width to the iPhone 14 Max Pro's screen width */
+// margin: 0 auto; /* center the content horizontally */
+// padding: 20px; /* add some padding to the content */
+// background-color: #773030;
+// border: 50px;
+// border-color: black;
+// border-radius: 20px;
+// display: flex;
+// justify-content: center;
+// align-items: center;
+// }
+
+// .div {
+//   display: flex; /* make the div a flex container */
+//   // flex-direction: column; /* make the flex items stack vertically */
+//   align-items: center; /* center the flex items horizontally */
+//   justify-content: center; /* center the flex items vertically */
+//   font-size: 30px;
+//   font-weight: bold;
+//   margin-bottom: 20px;
+// }
+
+// .image {
+//   display: flex;
+//   align-content: center;
+//   justify-content: center;
+//   margin-left: -6px;
+// width: 100px;
+// height: 100px;
+// border-radius: 50%;
+// margin-bottom: 20px;
+// }
+// .link {
+//   text-decoration: none;
+// }
+// .button {
+//   display: block; /* make the buttons full width */
+//   // width: 100%;
+//   margin-bottom: 10px; /* add some space between the buttons */
+//   padding: 10px 20px; /* add some padding to the buttons */
+//   font-size: 18px; /* set the font size */
+//   background-color: #007aff; /* set the background color */
+//   color: #fff; /* set the text color */
+//   border: none; /* remove the border */
+//   border-radius: 8px; /* add some rounded corners */
+// }
+
+// .button:hover {
+//   background-color: #0056b3; /* change the background color on hover */
+// }
+
+// .hr {
+//   margin: 20px 0; /* add some space above and below the horizontal lines */
+//   border: none; /* remove the border */
+//   border-top: 1px solid #ccc; /* add a light gray line */
+// }
 
 // .main {
 //   display: flex;

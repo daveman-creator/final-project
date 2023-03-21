@@ -24,12 +24,13 @@ export default async function CommentPage(props: Props) {
     : await getUserBySessionToken(sessionToken.value);
   console.log(user);
   const posts = user && (await getPostsByUserId(user.id));
+  console.log('posts from comment ', posts);
   const comments = posts && (await getCommentsByPostId(posts.id));
   const student = !sessionToken?.value
     ? undefined
     : await getStudentBySessionToken(sessionToken.value);
   console.log(student);
-
+  // const comments = await getCommentsByPostId(1);
   // if (!user) {
   //   notFound();
   // }

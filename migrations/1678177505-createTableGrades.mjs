@@ -3,6 +3,7 @@ export async function up(sql) {
     CREATE TABLE grades (
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
       user_id integer REFERENCES users(id) UNIQUE,
+      image_url varchar(300) NOT NULL,
       grade_name varchar(80) NOT NULL,
       grade_code varchar(80) NOT NULL
 

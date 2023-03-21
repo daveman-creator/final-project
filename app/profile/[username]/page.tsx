@@ -27,13 +27,14 @@ export default async function UserProfile({ params }: Props) {
       <p> Grade Name: {grade?.gradeName}</p>
       <p> Grade Code: {grade?.gradeCode}</p>
       {/* <p>{imageSrc && !uploadData}</p> */}
-      <Image
+      {/* <img src={imageSrc} width="430" height="300" alt="" /> */}
+      {/* <Image
         className={styles.Image}
         src="/image/Photo.png"
         width="80"
         height="80"
         alt="Classroom"
-      />
+      /> */}
       <br />
       <h1>Grades</h1>
       <Grades userId={user.id} />

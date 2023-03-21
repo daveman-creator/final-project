@@ -55,13 +55,14 @@ export default async function PostPage(props: Props) {
     console.log('posts', posts);
   }
   if (teacher) {
-    posts = await getPostsByUserId(teacher.userId);
+    posts = await getPostsByUserId(teacher.id);
     console.log('posts', posts);
   }
-  const comments = posts && (await getCommentsByPostId(posts.id));
+  console.log('post', posts);
+  const comments = await getCommentsByPostId(1);
   // posts = user && (await getPostsByUserId(user.id));
   // console.log('posts', posts);
-
+  console.log('comments', comments);
   // const student = !sessionToken?.value
   //   ? undefined
   //   : await getStudentBySessionToken(sessionToken.value);
@@ -80,7 +81,7 @@ export default async function PostPage(props: Props) {
     <main className={styles.main}>
       <h1 className={styles.h1}>Posts</h1>
       <p className={styles.p}> {grade?.gradeName}</p>
-      <Posts userId={user?.id} posts={posts} />
+      <Posts userId={user?.id} posts={posts} comments={comments} />
       {/* <Comments postId={posts?.id} comments={comments} /> */}
 
       {/* <Comments userId={user?.id} comments={comments} /> */}
@@ -88,6 +89,9 @@ export default async function PostPage(props: Props) {
       {/* <Comments /> */}
       {/* <p> Post content: {posts?.content}</p> */}
       {/* <p>{post.title}</p> */}
+      {/* <Link className={styles.Link} href={`/profile/${user.username}/student`}>
+        Back
+      </Link> */}
     </main>
   );
 }

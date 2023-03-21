@@ -4,6 +4,7 @@ import { sql } from './connect';
 type Grade = {
   id: number;
   userId: number;
+  imageUrl: string;
   gradeName: string;
   gradeCode: string;
 };
@@ -59,14 +60,25 @@ export const getGradeById = cache(async (gradeId: number) => {
 });
 
 export const createGrade = cache(
-  async (userId: number, gradeName: string, gradeCode: string) => {
+  async (
+    userId: number,
+    imageUrl: string,
+    gradeName: string,
+    gradeCode: string,
+  ) => {
     const [grade] = await sql<
-      { id: number; userId: number; gradeName: string; gradeCode: string }[]
+      {
+        id: number;
+        userId: number;
+        imageUrl: string;
+        gradeName: string;
+        gradeCode: string;
+      }[]
     >`
       INSERT INTO grades
-        (user_id, grade_name, grade_code)
+        (user_id, image_url,grade_name, grade_code)
       VALUES
-        (${userId}, ${gradeName}, ${gradeCode})
+        (${userId}, ${imageUrl}, ${gradeName}, ${gradeCode})
       RETURNING
           *
 

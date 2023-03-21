@@ -51,18 +51,20 @@ export default function Grades(props: { userId: number }) {
     ).then((response) => response.json());
 
     setImageSrc(data.secure_url);
+    // setUploadData(data);
+
     // setUploadData(JSON.stringify(data, null, 2));
 
     // Save the image URL to your server
-    const response = await fetch('/api/save-image', {
-      method: 'POST',
-      body: JSON.stringify({ imageUrl: data.secure_url }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then((response) => response.json());
+    // const response = await fetch('/api/save-image', {
+    //   method: 'POST',
+    //   body: JSON.stringify({ imageUrl: data.secure_url }),
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    // }).then((response) => response.json());
 
-    setImageUrl(response.imageUrl);
+    // setImageUrl(response.imageUrl);
   }
 
   return (
@@ -77,6 +79,7 @@ export default function Grades(props: { userId: number }) {
               method: 'POST',
               body: JSON.stringify({
                 userId: props.userId,
+                imageUrl: imageSrc,
                 gradeName,
                 gradeCode,
               }),
