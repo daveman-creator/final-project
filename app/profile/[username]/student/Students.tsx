@@ -1,5 +1,7 @@
 'use client';
 
+import { faFaceSmile } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 // import { Student } from '../../../database/students';
@@ -103,7 +105,7 @@ export default function Students(props: Props) {
                 // setStudents([...students, data.student]);
               }}
             >
-              Add Students
+              <FontAwesomeIcon icon={faFaceSmile} /> Add Students
             </button>
             <button
               className={styles.button2}

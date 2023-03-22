@@ -1,6 +1,7 @@
 'use client';
 
 import { FormatColorReset } from '@mui/icons-material';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { comment } from 'postcss';
 import { useState } from 'react';
@@ -19,6 +20,7 @@ type Post = {
 type Props = {
   posts?: Post[];
   userId?: number;
+  comments?: Comment[];
 };
 // { userId: number }
 export default function Posts(props: Props) {
@@ -28,6 +30,7 @@ export default function Posts(props: Props) {
   const [showInput, setShowInput] = useState(false);
   const [error, setError] = useState<string>();
   const [comments, setComments] = useState<Comment[]>([]);
+  const [postId, setPostId] = useState<number>(0);
   // const [hideInput, setHideInput] = useState(false);
   // const [idOnEditMode, setIdOnEditMode] = useState<number>();
   // const [editTitle, setEditTitle] = useState<string>('');
@@ -35,7 +38,9 @@ export default function Posts(props: Props) {
   // const [errors, setErrors] = useState<{ message: string }[]>([]);
   const router = useRouter();
   // console.log(props);
-
+  // const { post } = props;
+  console.log('postId', postId);
+  console.log('comments', comments);
   return (
     <main className={styles.main}>
       {/* <h1 className={styles.h1}>Posts</h1> */}
@@ -109,22 +114,60 @@ export default function Posts(props: Props) {
           >
             X
           </button>
+
           <br />
         </form>
       )}
+      {/* {Array.isArray(props.posts) &&
+          props.posts.map((post) */}
 
       <div>
-        {/* {JSON.stringify(props.comments)} */}
-        {props.posts?.map((post) => (
+        {props.posts?.map((post) => {
+          console.log('Running Javascript here is possible');
+
+          return (
+            <div key={post.id}>
+              <h1>{post.title}</h1>
+              <p>{post.content}</p>
+              <Comments comments={props.comments} postId={post.id} />
+              <Link href={`/profile/${props.username}/post/${post.id}`}>
+                {' '}
+                Post
+              </Link>
+              <button
+                className={styles.button}
+                onClick={async () => {
+                  const response = await fetch(`/api/posts/${post.id}`, {
+                    method: 'DELETE',
+                  });
+
+                  const data = await response.json();
+                  if (data.error) {
+                    setError(data.error);
+                    return;
+                  }
+
+                  router.refresh();
+                }}
+              >
+                Delete
+              </button>
+            </div>
+          );
+        })}
+
+        {/* {props.posts?.map((post) => (
           <div key={post.id}>
             <h1>{post.title}</h1>
-            <p>{post.content}</p>
-            {/* <Comments /> */}
-            <Comments postId={post.id} />
+            <p>{post.content}</p> */}
 
-            {/* <p>{comment.content}</p> */}
+        {/* <Comments /> */}
+        {/* <Comments comments={props.comments} postId={post.id} /> */}
+        {/* <Comments  /> */}
 
-            {/* {idOnEditMode !== post.id ? (
+        {/* <p>{comment.content}</p> */}
+
+        {/* {idOnEditMode !== post.id ? (
               post.title
             ) : (
               <input
@@ -144,7 +187,7 @@ export default function Posts(props: Props) {
             )}
             {''} */}
 
-            <button
+        {/* <button
               className={styles.button}
               onClick={async () => {
                 const response = await fetch(`/api/posts/${post.id}`, {
@@ -161,8 +204,8 @@ export default function Posts(props: Props) {
               }}
             >
               Delete
-            </button>
-            {/* <button
+            </button> */}
+        {/* <button
               onClick={() => {
                 setIdOnEditMode(post.id);
 
@@ -174,7 +217,7 @@ export default function Posts(props: Props) {
             </button>
 
             <button */}
-            {/* onClick={async () => {
+        {/* onClick={async () => {
                 const response = await fetch(`/api/posts/${post.id}`, {
                   method: 'PUT',
                   headers: {
@@ -202,7 +245,7 @@ export default function Posts(props: Props) {
               save
             </button> */}
 
-            {/* <button
+        {/* <button
               onClick={async () => {
                 const response = await fetch(`/api/posts/${post.id}`, {
                   method: 'PATCH',
@@ -224,9 +267,9 @@ export default function Posts(props: Props) {
             >
               Edit
             </button> */}
-          </div>
-        ))}
       </div>
+      {/* ))} */}
+      {/* </div> */}
     </main>
   );
 }

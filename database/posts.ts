@@ -35,6 +35,7 @@ export const getPostById = cache(async (id: number) => {
     WHERE
       posts.id = ${id}
   `;
+  console.log('post from querry', post);
   return post;
 });
 
@@ -51,6 +52,7 @@ export const getPostsByUserId = cache(async (userId: number) => {
       user_id = ${userId}
 
   `;
+  console.log('post from querry', post);
   return post;
 });
 //  posts.user_id = ${userId}

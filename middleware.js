@@ -14,7 +14,7 @@ export function middleware(request) {
     requestHeaders.set('x-sessionToken-to-delete', sessionToken);
   }
 
-  const response = NextResponse.next.next({
+  const response = NextResponse.next({
     request: {
       headers: requestHeaders,
     },
