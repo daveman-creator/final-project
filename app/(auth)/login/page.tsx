@@ -13,7 +13,8 @@ export default async function LoginPage(props: Props) {
     (await getValidSessionByToken(sessionTokenCookie.value));
   // if I do, redirect to the profile page
   // if (!session) {
-  //   redirect('/studentLogin');
+  //   redirect('/RegisterForm');
+  // }
   //   // redirect('/profile/[username]');
   // }
 

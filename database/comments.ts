@@ -49,3 +49,32 @@ export const getCommentById = cache(async (id: number) => {
   `;
   return comment;
 });
+
+export const updateCommentById = cache(async (id: number, content: string) => {
+  const [comment] = await sql<{ id: number; content: string }[]>`
+      UPDATE
+        comments
+      SET
+
+        content = ${content}
+
+      WHERE
+        id = ${id}
+      RETURNING *
+    `;
+  return comment;
+});
+
+export const deleteCommentById = cache(async (id: number) => {
+  const [comment] = await sql<{ id: number; content: string }[]>`
+    DELETE FROM
+    comments
+    WHERE
+      comments.id = ${id}
+      RETURNING
+        id,
+
+        content
+  `;
+  return comment;
+});

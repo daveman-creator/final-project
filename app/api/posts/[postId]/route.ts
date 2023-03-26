@@ -92,7 +92,7 @@ export async function PUT(
     return NextResponse.json(
       {
         error:
-          'Request body is missing one of the needed properties firstName, lastName and gradeId',
+          'Request body is missing one of the needed properties title and content',
       },
       { status: 400 },
     );

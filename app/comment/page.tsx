@@ -10,7 +10,15 @@ import Comments from './Comments';
 
 // type Props = { params: { username: string } };
 export const dynamic = 'force-dynamic';
-// props: Props
+
+type Props = {
+  userId: number;
+  studentId: number;
+  postId: number;
+  content: string;
+  comments: string;
+};
+
 export default async function CommentPage(props: Props) {
   // const user = await getUserByUsername(params.username);
 

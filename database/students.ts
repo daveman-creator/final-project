@@ -62,26 +62,26 @@ export const getStudentByGradeCode = cache(
   },
 );
 // students.grade_id = grades.id
-export const getStudentByFirstNameAndLastNameWithGradeCode = cache(
-  async (firstName: string, lastName: string, gradeCode: string) => {
-    const [student] = await sql<
-      { id: number; firstName: string; lastName: string; gradeCode: string }[]
-    >`
-      SELECT
-        id,
-        first_name,
-        last_name,
-        grade_code
-      FROM
-        students
-      WHERE
-        first_name = ${firstName}
-        AND last_name = ${lastName}
-        AND grade_id = ${gradeCode}
-    `;
-    return student;
-  },
-);
+// export const getStudentByFirstNameAndLastNameWithGradeCode = cache(
+//   async (firstName: string, lastName: string, gradeCode: string) => {
+//     const [student] = await sql<
+//       { id: number; firstName: string; lastName: string; gradeCode: string }[]
+//     >`
+//       SELECT
+//         id,
+//         first_name,
+//         last_name,
+//         grade_code
+//       FROM
+//         students
+//       WHERE
+//         first_name = ${firstName}
+//         AND last_name = ${lastName}
+//         AND grade_id = ${gradeCode}
+//     `;
+//     return student;
+//   },
+// );
 
 export const getStudentsByGradeId = cache(async (gradeId: number) => {
   const students = await sql<Student[]>`

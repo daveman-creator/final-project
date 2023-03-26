@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GradesResponseBody } from '../../api/grade/route';
 
 export default function Grades(props: { userId: number }) {
@@ -16,7 +16,14 @@ export default function Grades(props: { userId: number }) {
   const [imageUrl, setImageUrl] = useState<string>();
   const router = useRouter();
 
-  function handleOnChange(changeEvent) {
+  // useEffect(() => {
+  //   // Save the image URL to localStorage whenever it changes
+  //   if (imageSrc) {
+  //     localStorage.setItem('image_url', imageSrc);
+  //   }
+  // }, [imageSrc]);
+
+  function handleOnChange(changeEvent: any) {
     const reader = new FileReader();
 
     reader.onload = function (onLoadEvent) {
@@ -27,7 +34,7 @@ export default function Grades(props: { userId: number }) {
     reader.readAsDataURL(changeEvent.target.files[0]);
   }
 
-  async function handleOnSubmit(event) {
+  async function handleOnSubmit(event: any) {
     event.preventDefault();
     const form = event.currentTarget;
     const fileInput = Array.from(form.elements).find(
@@ -51,7 +58,10 @@ export default function Grades(props: { userId: number }) {
     ).then((response) => response.json());
 
     setImageSrc(data.secure_url);
-    // setUploadData(data);
+    setImageUrl(data.secure_url);
+
+    // // Save the image URL to localStorage
+    // localStorage.setItem('image_url', data.secure_url);
 
     // setUploadData(JSON.stringify(data, null, 2));
 
@@ -68,79 +78,105 @@ export default function Grades(props: { userId: number }) {
   }
 
   return (
-    <>
-      {!showInput && <button onClick={() => setShowInput(true)}>Create</button>}
-      {showInput && (
+    <main className="bg-indigo-100 ">
+      <div>
+        {!showInput && (
+          <button
+            onClick={() => setShowInput(true)}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 my-4"
+          >
+            {' '}
+            Click To Create
+          </button>
+        )}
+
+        {showInput && (
+          <form
+            className="flex items-center gap-4"
+            onSubmit={async (event) => {
+              event.preventDefault();
+
+              const response = await fetch('/api/grade', {
+                method: 'POST',
+                body: JSON.stringify({
+                  userId: props.userId,
+                  imageUrl: imageSrc,
+                  gradeName,
+                  gradeCode,
+                }),
+              });
+
+              const data = await response.json();
+              if (data.error) {
+                setError(data.error);
+                return;
+              }
+
+              router.refresh();
+            }}
+          >
+            <label className="font-bold text-lg mb-2">
+              <span>Create Grade:</span>
+
+              <input
+                value={gradeName}
+                placeholder="Grade"
+                onChange={(event) => setGradeName(event.currentTarget.value)}
+                className="border border-gray-400 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </label>
+
+            <label className="font-bold text-lg mb-2">
+              <span> Grade Code:</span>
+
+              <input
+                value={gradeCode}
+                placeholder="Grade Code"
+                onChange={(event) => setGradeCode(event.currentTarget.value)}
+                className="border border-gray-400 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </label>
+
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 my-4">
+              Create
+            </button>
+
+            <br />
+          </form>
+        )}
+      </div>
+
+      <div className="flex justify-center items-center">
         <form
-          onSubmit={async (event) => {
-            event.preventDefault();
-
-            const response = await fetch('/api/grade', {
-              method: 'POST',
-              body: JSON.stringify({
-                userId: props.userId,
-                imageUrl: imageSrc,
-                gradeName,
-                gradeCode,
-              }),
-              // email,
-            });
-
-            // const data: GradesResponseBody = await response.json();
-
-            // if ('errors' in data) {
-            //   setErrors(data.errors);
-            //   return;
-            // }
-            // router.refresh();
-
-            const data = await response.json();
-            if (data.error) {
-              setError(data.error);
-              return;
-            }
-
-            router.refresh();
-          }}
+          method="POST"
+          onChange={handleOnChange}
+          onSubmit={handleOnSubmit}
+          className="px-4"
         >
-          <label>
-            Create Grade:
-            <input
-              value={gradeName}
-              placeholder="Grade"
-              onChange={(event) => setGradeName(event.currentTarget.value)}
-            />
-          </label>
-          {/* <button>Create</button> */}
-          <label>
-            Generate Grade Code:
-            <input
-              value={gradeCode}
-              placeholder="Grade Code"
-              onChange={(event) => setGradeCode(event.currentTarget.value)}
-            />
-          </label>
-          <button>Create</button>
-          {/* router.refresh(); */}
-          <br />
-        </form>
-      )}
-      <form method="POST" onChange={handleOnChange} onSubmit={handleOnSubmit}>
-        <p>
-          <input type="file" name="file" />
-        </p>
-        <img src={imageSrc} width="430" height="300" alt="" />
-        {imageSrc && !uploadData && (
-          <p>
-            <button>Upload Files</button>
+          <p className="my-0">
+            <input type="file" name="file" />
           </p>
-        )}
-        {uploadData && (
-          <code>
-            <pre>{JSON.stringify(uploadData, null, 2)}</pre>
-          </code>
-        )}
-      </form>
-    </>
+          <img
+            className="my-8 margin-top: -20px"
+            src={imageSrc}
+            width="1000"
+            height="800"
+            alt=""
+          />
+          {!!imageSrc && !uploadData && (
+            <p>
+              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 my-0">
+                Upload Files
+              </button>
+            </p>
+          )}
+          {!!uploadData && (
+            <code>
+              <pre>{JSON.stringify(uploadData, null, 2)}</pre>
+            </code>
+          )}
+        </form>
+      </div>
+    </main>
   );
 }

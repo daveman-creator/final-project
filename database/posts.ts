@@ -141,29 +141,3 @@ WHERE
     return user;
   },
 );
-
-//   posts.id = ${id}
-// posts.id = 12;
-// students.grade_id = 1
-// AND posts.user_id = 5
-// -- SELECT
-//    posts.id,
-//    posts.title,
-//    posts.content,
-//    posts.user_id
-
-//    FROM
-//   posts
-//    INNER JOIN
-//    users ON users.id = posts.user_id
-//    INNER JOIN
-//    grades ON grades.id = grades.user_id
-//    INNER JOIN
-//    students ON students.grade_id = grades.id
-//   WHERE
-//   posts.id = 12`;
-// -- // -- posts.grade_id = ${gradeId}
-// -- // -- posts`;
-// This function will insert a new row into the posts table with the given title, content, and userId. The userId parameter represents the ID of the user who created the post. The function then returns the newly created post with its id, title, and content.
-
-// Note that the createPost function does not create a new user. It assumes that the user who created the post already exists in the users table and takes the userId parameter as input. You can use the createUser function (which you provided earlier) to create a new user if necessary.

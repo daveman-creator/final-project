@@ -8,7 +8,9 @@ import StudentLoginForm from './StudentLoginForm';
 
 console.log('running');
 
-type Props = { searchParams: { returnTo?: string | string[] } };
+type Props = {
+  searchParams: { returnTo?: string | string[]; username: string };
+};
 
 export default async function StudentLoginPage(props: Props) {
   // check if I have a valid session
@@ -44,9 +46,11 @@ export default async function StudentLoginPage(props: Props) {
   // if I don't, show the login form
 
   return (
-    <StudentLoginForm
-      returnTo={props.searchParams.returnTo}
-      username={teacher?.username}
-    />
+    <div className=" flex flex-col items-center justify-content min-h-screen mb-12 bg-fixed bg-center bg-cover bg-indigo-100">
+      <StudentLoginForm
+        returnTo={props.searchParams.returnTo}
+        username={teacher?.username}
+      />
+    </div>
   );
 }

@@ -7,6 +7,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { style } from '@mui/system';
 import { cookies } from 'next/headers';
+import Image from 'next/image';
 import Link from 'next/link';
 import { NextResponse } from 'next/server';
 import { getUserBySessionToken } from '../database/users';
@@ -33,12 +34,22 @@ export default function RootLayout({
     <html lang="en">
       <body
         style={{ backgroundColor: '#dbb3b3' }}
-        className="fixed left-0 top-0 w-full z-10 ease-in duration-300"
+        className="overflow-x-hidden overflow-y-auto h-screen"
       >
-        {/* <main className={styles.main}> */}
-        <div className="max-w-[1240px] m-auto flex justify-center items-center p-4 text-black">
-          <ul className="show sm:flex  space-x-60">
-            <li className="p-4  ">
+        {/* <main className={styles.main}>max-w-[1240px]max-w-screen-lg "flex space-x-60"max-w-full */}
+        <div className=" flex justify-between  items-center p-4 text-black">
+          <Link href="/">
+            <Image
+              src="/image/Sky.jpg"
+              width="100"
+              height="50"
+              alt="logo"
+              className="text-2xl text-black hover:text-blue-500 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer "
+            />
+          </Link>
+          {/* "flex sm:space-x-4 md:space-x-8 lg:space-x-60" */}
+          <ul className="flex space-x-20">
+            {/* <li className="p-4  ">
               <Link href="/">
                 <FontAwesomeIcon
                   icon={faHouseUser}
@@ -46,17 +57,17 @@ export default function RootLayout({
                 />{' '}
                 Home
               </Link>
-            </li>
-            <li className="p-4  ">
+            </li> */}
+            <li className="p-2  ">
               <Link href="/landingpage">
                 <FontAwesomeIcon
                   icon={faPersonWalkingArrowRight}
                   className="text-2xl text-black hover:text-blue-500 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer "
                 />
-                lets go
+                get started
               </Link>
             </li>
-            <li className="p-4  ">
+            <li className="p-2  ">
               <Link href="/logout">
                 <FontAwesomeIcon
                   icon={faRightFromBracket}
@@ -67,7 +78,6 @@ export default function RootLayout({
             </li>
           </ul>
         </div>
-
         {children}
         {/* </main> */}
       </body>

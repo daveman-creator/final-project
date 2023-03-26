@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { RegisterResponseBody } from '../../api/(auth)/register/route';
-import styles from './page.module.scss';
 
 export default function RegisterForm(props: { returnTo?: string | string[] }) {
   const [username, setUsername] = useState('');
@@ -15,9 +14,10 @@ export default function RegisterForm(props: { returnTo?: string | string[] }) {
   const router = useRouter();
 
   return (
-    <main className={styles.main}>
-      <div className={styles.div}>Teacher</div>
+    <main className=" flex flex-col items-center justify-content min-h-screen mb-12 bg-fixed bg-center bg-cover bg-indigo-100">
+      <div className="font-bold text-4xl md:text-5xl mt-10 mb-10">Teacher</div>
       <form
+        className="flex flex-col items-center justify-center bg-white rounded-lg shadow-lg p-10 border "
         onSubmit={async (event) => {
           event.preventDefault();
 
@@ -54,44 +54,49 @@ export default function RegisterForm(props: { returnTo?: string | string[] }) {
         ))}
 
         <Image
-          className={styles.image}
           src="/image/Teacher.webp"
           width="400"
           height="350"
           alt="Classroom"
         />
         <br />
-        <hr className={styles.hr} />
+        <hr />
         <label>
           username:
           <input
+            className="ml-4 border rounded-md p-2 w-64 my-1"
             value={username}
             onChange={(event) => setUsername(event.currentTarget.value)}
           />
         </label>
-        <hr className={styles.hr} />
+        <hr />
         <label>
-          email:
+          email add:
           <input
+            className="ml-4 border rounded-md p-2 w-64 my-1 "
             value={email}
             onChange={(event) => setEmail(event.currentTarget.value)}
           />
         </label>
-        <hr className={styles.hr} />
+        <hr />
         <label>
           password:
           <input
+            className="ml-4 border rounded-md p-2 w-64 my-1"
             value={password}
+            type="password"
             onChange={(event) => setPassword(event.currentTarget.value)}
           />
         </label>
-        <hr className={styles.hr} />
-        <Link className={styles.Link} href="/">
-          Back
-        </Link>
+        <hr />
 
         <br />
-        <button className={styles.button}>Register</button>
+        <button className="w-1/2 md:w-1/3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 my-4">
+          Register
+        </button>
+        <Link className="my-4" href="/">
+          Back
+        </Link>
       </form>
     </main>
   );

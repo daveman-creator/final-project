@@ -15,17 +15,16 @@ export default function LoginForm(props: { returnTo?: string | string[] }) {
   const router = useRouter();
 
   return (
-    <main className={styles.main}>
-      <div className={styles.div}>Teacher</div>
+    <main className=" flex flex-col items-center justify-content min-h-screen mb-12 bg-fixed bg-center bg-cover bg-indigo-100">
+      <div className="font-bold text-4xl md:text-5xl mt-10 mb-10">Teacher</div>
       <form
-        // className={styles.form}
+        className="flex flex-col items-center justify-center bg-white rounded-lg shadow-lg p-10 border "
         onSubmit={async (event) => {
           event.preventDefault();
 
           const response = await fetch('/api/login', {
             method: 'POST',
             body: JSON.stringify({ username, password }),
-            // email,
           });
 
           const data: RegisterResponseBody = await response.json();
@@ -51,49 +50,45 @@ export default function LoginForm(props: { returnTo?: string | string[] }) {
           // router.refresh();
         }}
       >
-        {/* <h1 className={styles.h1}>Teacher</h1> */}
         {errors.map((error) => (
           <div key={`error-${error.message}`}>Error: {error.message}</div>
         ))}
         <Image
-          className={styles.image}
           src="/image/Teacher.webp"
           width="400"
           height="400"
           alt="Classroom"
         />
         <br />
-        <hr className={styles.hr} />
+        <hr />
         <label>
           username:
           <input
+            className="ml-4 border rounded-md p-2 w-64 my-1"
             value={username}
             onChange={(event) => setUsername(event.currentTarget.value)}
           />
         </label>
-        <hr className={styles.hr} />
-        {/* <label>
-        email:
-        <input
-          value={email}
-          onChange={(event) => setEmail(event.currentTarget.value)}
-        />
-      </label> */}
+        <hr />
+
         <label>
           password:
           <input
+            className="ml-4 border rounded-md p-2 w-64 my-1"
             value={password}
+            type="password"
             onChange={(event) => setPassword(event.currentTarget.value)}
           />
         </label>
         <hr className={styles.hr} />
-        <div>
-          {/* class="pass-link" */}
-          <Link href="/">Forgot password?</Link>
-        </div>
-        <button className={styles.button}>Login</button>
 
-        <div>
+        <button className="w-1/2 md:w-1/3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 my-4">
+          Login
+        </button>
+        <div className="my-4">
+          <Link href="/">Back</Link>
+        </div>
+        <div className="my-4">
           Don't have an account?
           <Link href="/register">Register now</Link>
         </div>

@@ -1,141 +1,141 @@
-.main {
-  width: 428px;
-  height: 850px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #773030;
-  border-radius: 20px;
-  overflow: auto;
-  color: white;
-}
+// .main {
+//   width: 428px;
+//   height: 850px;
+//   margin: 0 auto;
+//   padding: 20px;
+//   background-color: #773030;
+//   border-radius: 20px;
+//   overflow: auto;
+//   color: white;
+// }
 
-.h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+// .h1 {
+//   font-size: 2rem;
+//   margin-bottom: 1rem;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }
 
-.button {
-  background-color: #0066cc;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-right: 1rem;
-}
-.button2 {
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  margin: 0 auto;
-  // margin-right: 1rem;
-  // margin-left: 1rem;
-}
+// .button {
+//   background-color: #0066cc;
+//   color: white;
+//   border: none;
+//   padding: 0.5rem 1rem;
+//   border-radius: 4px;
+//   cursor: pointer;
+//   margin-right: 1rem;
+// }
+// .button2 {
+//   background-color: #4caf50;
+//   color: white;
+//   border: none;
+//   padding: 0.5rem 1rem;
+//   border-radius: 4px;
+//   cursor: pointer;
+//   margin: 0 auto;
+//   // margin-right: 1rem;
+//   // margin-left: 1rem;
+// }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  margin-top: 1rem;
-}
+// .form {
+//   display: flex;
+//   flex-direction: column;
+//   margin-top: 1rem;
+// }
 
-.label {
-  margin-top: 1rem;
-  display: block;
-  font-weight: bold;
-}
+// .label {
+//   margin-top: 1rem;
+//   display: block;
+//   font-weight: bold;
+// }
 
-.input,
-.textarea {
-  border: 1px solid #ccc;
-  padding: 0.5rem;
-  font-size: 1rem;
-  margin-top: 0.5rem;
-  border-radius: 4px;
-}
+// .input,
+// .textarea {
+//   border: 1px solid #ccc;
+//   padding: 0.5rem;
+//   font-size: 1rem;
+//   margin-top: 0.5rem;
+//   border-radius: 4px;
+// }
 
-.button[type='submit'] {
-  margin-top: 1rem;
-}
-.Link {
-  color: white;
-}
+// .button[type='submit'] {
+//   margin-top: 1rem;
+// }
+// .Link {
+//   color: white;
+// }
 
-.error {
-  color: red;
-  margin-top: 1rem;
-}
+// .error {
+//   color: red;
+//   margin-top: 1rem;
+// }
 
-.post {
-  margin-top: 2rem;
-  border: 1px solid #ccc;
-  padding: 1rem;
-  border-radius: 4px;
-}
+// .post {
+//   margin-top: 2rem;
+//   border: 1px solid #ccc;
+//   padding: 1rem;
+//   border-radius: 4px;
+// }
 
-.post h1 {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
+// .post h1 {
+//   font-size: 1.5rem;
+//   margin-bottom: 0.5rem;
+// }
 
-.p {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+// .p {
+//   font-size: 1.2rem;
+//   margin-bottom: 1rem;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }
 
-.comment-form {
-  margin-top: 1rem;
-}
+// .comment-form {
+//   margin-top: 1rem;
+// }
 
-.comment-form label {
-  display: block;
-  margin-bottom: 0.5rem;
-}
+// .comment-form label {
+//   display: block;
+//   margin-bottom: 0.5rem;
+// }
 
-.comment-form input,
-.comment-form textarea {
-  width: 100%;
-  margin-top: 0.5rem;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
+// .comment-form input,
+// .comment-form textarea {
+//   width: 100%;
+//   margin-top: 0.5rem;
+//   padding: 0.5rem;
+//   border: 1px solid #ccc;
+//   border-radius: 4px;
+// }
 
-.comment-form button {
-  margin-top: 0.5rem;
-  background-color: #0066cc;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
+// .comment-form button {
+//   margin-top: 0.5rem;
+//   background-color: #0066cc;
+//   color: white;
+//   border: none;
+//   padding: 0.5rem 1rem;
+//   border-radius: 4px;
+//   cursor: pointer;
+// }
 
-.comments {
-  margin-top: 1rem;
-}
+// .comments {
+//   margin-top: 1rem;
+// }
 
-.comment {
-  margin-top: 1rem;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
+// .comment {
+//   margin-top: 1rem;
+//   padding: 0.5rem;
+//   border: 1px solid #ccc;
+//   border-radius: 4px;
+// }
 
-.comment p {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
+// .comment p {
+//   font-size: 1.2rem;
+//   margin-bottom: 0.5rem;
+// }
 
-.comment small {
-  font-size: 0.8rem;
-  color: #666;
-}
+// .comment small {
+//   font-size: 0.8rem;
+//   color: #666;
+// }

@@ -3,10 +3,14 @@
 @import 'tailwindcss/utilities';
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; */
+  /* overflow-y: auto;
+  overflow-x: hidden; */
+
   font-family: 'Playfair Display', serif;
 }
 
-.custom-img {
+/* .custom-img {
   background-image: url('https://i.pinimg.com/originals/92/2d/db/922ddb2a059239227bacce840040b302.jpg');
-}
+} */
+/* https: //cdn.pixabay.com/photo/2020/02/09/09/03/architecture-4832412_960_720.jpg; */

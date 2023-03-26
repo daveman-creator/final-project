@@ -21,10 +21,12 @@ export default function StudentLoginForm(props: {
   const router = useRouter();
 
   return (
-    <main className={styles.main}>
-      <div className={styles.div}>Student</div>
+    <main className="bg-indigo-100">
+      <div className="font-bold text-4xl md:text-5xl mt-10 mb-10 text-center">
+        Student
+      </div>
       <form
-        // className={styles.form}
+        className="flex flex-col items-center justify-center bg-white rounded-lg shadow-lg p-10 border "
         onSubmit={async (event) => {
           event.preventDefault();
 
@@ -52,7 +54,8 @@ export default function StudentLoginForm(props: {
           }
           // router.push(`/profile/${data.user.username}/post`);
           router.push(`/profile/${props.username}/post`);
-          // router.push(`/post/${data.gradeId.gradeId}`);
+          // router.push(`/profile/${firstName}_${lastName}_${gradeCode}/post`);
+
           // router.push(`/post/${data.user.username}`);
 
           // router.refresh();
@@ -65,7 +68,6 @@ export default function StudentLoginForm(props: {
           <div key={`error-${error.message}`}>Error: {error.message}</div>
         ))}
         <Image
-          className={styles.image}
           src="/image/Teacher.webp"
           width="400"
           height="350"
@@ -76,21 +78,17 @@ export default function StudentLoginForm(props: {
         <label>
           FirstName:
           <input
+            className="ml-4 border rounded-md p-2 w-64 my-1"
             value={firstName}
             onChange={(event) => setFirstName(event.currentTarget.value)}
           />
         </label>
         <hr className={styles.hr} />
-        {/* <label>
-        email:
-        <input
-          value={email}
-          onChange={(event) => setEmail(event.currentTarget.value)}
-        />
-      </label> */}
+
         <label>
           LastName:
           <input
+            className="ml-4 border rounded-md p-2 w-64 my-1"
             value={lastName}
             onChange={(event) => setLastName(event.currentTarget.value)}
           />
@@ -99,16 +97,21 @@ export default function StudentLoginForm(props: {
         <label>
           GradeCode:
           <input
+            className="ml-4 border rounded-md p-2 w-64 my-1"
             value={gradeCode}
             onChange={(event) => setGradeCode(event.currentTarget.value)}
           />
         </label>
         <hr className={styles.hr} />
+
+        <button className="w-1/2 md:w-1/3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 my-4">
+          Login
+        </button>
         <div>
-          {/* class="pass-link" */}
-          <Link href="/">Forgot password?</Link>
+          <Link className="my-4" href="/">
+            Back
+          </Link>
         </div>
-        <button className={styles.button}>Login</button>
       </form>
     </main>
   );
