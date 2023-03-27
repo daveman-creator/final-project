@@ -1,6 +1,9 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { getTeacherNameByStudentName } from '../../../database/posts';
+import {
+  getPostsByUserId,
+  getTeacherNameByStudentName,
+} from '../../../database/posts';
 import { getValidSessionByToken } from '../../../database/sessions';
 import { getStudentBySessionToken } from '../../../database/students';
 import { getUserBySessionToken } from '../../../database/users';
@@ -25,7 +28,7 @@ export default async function StudentLoginPage(props: Props) {
   const student = !sessionToken?.value
     ? undefined
     : await getStudentBySessionToken(sessionToken.value);
-  console.log('student', student);
+  console.log('student login', student);
 
   const user = !sessionToken?.value
     ? undefined
@@ -37,6 +40,23 @@ export default async function StudentLoginPage(props: Props) {
     student?.lastName,
   );
   console.log('teacher backend', teacher);
+
+  let posts;
+
+  if (user) {
+    posts = await getPostsByUserId(user.id);
+    console.log('posts', posts);
+  }
+  if (teacher) {
+    posts = await getPostsByUserId(teacher.id);
+    console.log('posts', posts);
+  }
+  console.log('post', posts);
+
+  // const teacher = await getTeacherNameByStudentName(
+  //   studentByGradeCode.firstName,
+  //   studentByGradeCode.lastName,
+  // );
   // if I do, redirect to the profile page
   // if (session) {
   //   redirect('/studentLogin');

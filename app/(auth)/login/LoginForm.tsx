@@ -86,7 +86,7 @@ export default function LoginForm(props: { returnTo?: string | string[] }) {
           Login
         </button>
         <div className="my-4">
-          <Link href="/">Back</Link>
+          <Link href="/landingpage">Back</Link>
         </div>
         <div className="my-4">
           Don't have an account?

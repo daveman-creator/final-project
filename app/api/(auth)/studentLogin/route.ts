@@ -2,6 +2,7 @@ import crypto from 'node:crypto';
 import bcrypt from 'bcrypt';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { getTeacherNameByStudentName } from '../../../../database/posts';
 import { createStudentSession } from '../../../../database/sessions';
 import {
   getStudentByFirstNameAndLastNameWithGradeCode,
@@ -92,12 +93,17 @@ export const POST = async (request: NextRequest) => {
     session.token,
   );
   // - add the new header
+  const teacher = await getTeacherNameByStudentName(
+    studentByGradeCode.firstName,
+    studentByGradeCode.lastName,
+  );
 
   return NextResponse.json(
     {
       student: {
         firstName: studentByGradeCode.firstName,
         lastName: studentByGradeCode.lastName,
+        teacher: teacher,
       },
     },
     {

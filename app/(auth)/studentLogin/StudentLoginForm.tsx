@@ -54,6 +54,7 @@ export default function StudentLoginForm(props: {
           }
           // router.push(`/profile/${data.user.username}/post`);
           router.push(`/profile/${props.username}/post`);
+
           // router.push(`/profile/${firstName}_${lastName}_${gradeCode}/post`);
 
           // router.push(`/post/${data.user.username}`);
@@ -108,7 +109,7 @@ export default function StudentLoginForm(props: {
           Login
         </button>
         <div>
-          <Link className="my-4" href="/">
+          <Link className="my-4" href="/landingpage">
             Back
           </Link>
         </div>
