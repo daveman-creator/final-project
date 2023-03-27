@@ -45,8 +45,11 @@ export default function Home() {
             width="700"
             height="600"
             alt="Sky"
-            className="text-2xl text-black hover:text-blue-500 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer "
+            className="text-2xl
+
+             "
           />
+          {/* text-black hover:text-blue-500 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer */}
         </div>
       </div>
     </main>

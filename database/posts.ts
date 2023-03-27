@@ -40,6 +40,7 @@ export const getPostById = cache(async (id: number) => {
 });
 
 export const getPostsByUserId = cache(async (userId: number) => {
+  console.log('userId from querry', userId);
   const post = await sql<{ id: number; title: string; content: string }[]>`
     SELECT
       id,
@@ -123,7 +124,7 @@ WHERE
 
 export const getTeacherNameByStudentName = cache(
   async (studentFirstName: string, studentLastName: string) => {
-    const [user] = await sql<{ id: number }[]>`
+    const [user] = await sql<{ userId: number; username: string }[]>`
   SELECT
   users.username,
    users.id As user_id

@@ -14,7 +14,7 @@ export const dynamic = 'force-dynamic';
 type Props = { params: { username: string } };
 
 export default async function PostPage({ params }: Props) {
-  console.log('params', params);
+  // console.log('params', params);
   const cookieStore = cookies();
   const sessionToken = cookieStore.get('sessionToken');
 
@@ -24,12 +24,12 @@ export default async function PostPage({ params }: Props) {
   const student = !sessionToken?.value
     ? undefined
     : await getStudentBySessionToken(sessionToken.value);
-  console.log('student', student);
+  // console.log('student', student);
 
   const user = !sessionToken?.value
     ? undefined
     : await getUserBySessionToken(sessionToken.value);
-  console.log('user', user);
+  // console.log('user', user);
 
   const grade = user && (await getGradesByUserId(user.id));
 
@@ -37,19 +37,21 @@ export default async function PostPage({ params }: Props) {
     student?.firstName,
     student?.lastName,
   );
-  console.log('teacher', teacher);
+  // console.log('teacher from post', teacher);
 
-  let posts;
-
-  if (user) {
-    posts = await getPostsByUserId(user.id);
-    console.log('posts', posts);
+  let posts = null;
+  console.log('student from post', student);
+  console.log('teacher from post', teacher?.userId);
+  if (student && teacher) {
+    posts = await getPostsByUserId(teacher.userId);
+    // console.log('posts from post for student', posts);
+  } else if (teacher) {
+    posts = await getPostsByUserId(teacher.userId);
+    // console.log('posts for teachers', posts);
+  } else {
+    return null;
   }
-  if (teacher) {
-    posts = await getPostsByUserId(teacher.id);
-    console.log('posts', posts);
-  }
-  console.log('post', posts);
+  console.log('posts for current user ', posts);
 
   return (
     <main className="bg-indigo-100 min-h-screen">

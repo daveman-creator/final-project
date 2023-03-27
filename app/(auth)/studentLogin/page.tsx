@@ -39,17 +39,24 @@ export default async function StudentLoginPage(props: Props) {
     student?.firstName,
     student?.lastName,
   );
-  console.log('teacher backend', teacher);
+  console.log('teacher backend', teacher?.username);
 
   let posts;
 
-  if (user) {
-    posts = await getPostsByUserId(user.id);
-    console.log('posts', posts);
-  }
-  if (teacher) {
-    posts = await getPostsByUserId(teacher.id);
-    console.log('posts', posts);
+  // if (stud) {
+  //   posts = await getPostsByUserId(user.id);
+  //   console.log('posts', posts);
+  // }
+  // if (teacher) {
+  //   posts = await getPostsByUserId(teacher.id);
+  //   console.log('posts', posts);
+  // }
+  if (student && teacher) {
+    posts = await getPostsByUserId(teacher.userId);
+    // console.log('posts from post for student', posts);
+  } else {
+    posts = await getPostsByUserId(teacher?.userId);
+    // console.log('posts for teachers', posts);
   }
   console.log('post', posts);
 
@@ -64,7 +71,7 @@ export default async function StudentLoginPage(props: Props) {
   // }
 
   // if I don't, show the login form
-
+  console.log('teacher here', teacher);
   return (
     <div className=" flex flex-col items-center justify-content min-h-screen mb-12 bg-fixed bg-center bg-cover bg-indigo-100">
       <StudentLoginForm

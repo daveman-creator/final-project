@@ -10,8 +10,8 @@ import styles from './page.module.scss';
 // props: { returnTo?: string | string[] }
 
 export default function StudentLoginForm(props: {
+  username: string | undefined;
   returnTo?: string | string[];
-  username: string;
 }) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -19,6 +19,7 @@ export default function StudentLoginForm(props: {
   // const [email, setEmail] = useState('');
   const [errors, setErrors] = useState<{ message: string }[]>([]);
   const router = useRouter();
+  console.log('studentform', props.username);
 
   return (
     <main className="bg-indigo-100">
@@ -53,6 +54,7 @@ export default function StudentLoginForm(props: {
             return;
           }
           // router.push(`/profile/${data.user.username}/post`);
+          // console.log('student login Url', `/profile/${props.username}/post`);
           router.push(`/profile/${props.username}/post`);
 
           // router.push(`/profile/${firstName}_${lastName}_${gradeCode}/post`);
