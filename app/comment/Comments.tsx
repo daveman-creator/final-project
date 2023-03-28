@@ -14,22 +14,19 @@ type Comment = {
 
 type Props = {
   comments?: Comment[];
-  // userId?: number;
-  // studentId?: number;
+
   postId?: number;
 };
-// { userId: number }
+
 export default function Comments(props: Props) {
-  // const router = useRouter;
-  // const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  // const [comments, setComments] = useState<Comment[]>([]);
+
   const [showInput, setShowInput] = useState(false);
   const [error, setError] = useState<string>();
   const [comments, setComments] = useState<Comment[]>([]);
-  // const [errors, setErrors] = useState<{ message: string }[]>([]);
+
   const router = useRouter();
-  // console.log(props);
+  console.log('error', error);
   console.log('props', props.comments);
   useEffect(() => {
     setComments(props.comments || []);
@@ -53,8 +50,6 @@ export default function Comments(props: Props) {
             const response = await fetch('/api/comment', {
               method: 'POST',
               body: JSON.stringify({
-                // userId: props.userId,
-                // studentId: props.studentId,
                 postId: props.postId,
                 content,
               }),
@@ -95,7 +90,7 @@ export default function Comments(props: Props) {
 
       <div className="p-4">
         {comments.map((comment) => (
-          <div key={comment.id} className="mb-4">
+          <div key={`comment-${comment.id}`} className="mb-4">
             {/* <h1>{post.title}</h1> */}
             <p className="text-lg">{comment.content}</p>
             <div className="mt-2 flex">

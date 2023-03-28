@@ -1,13 +1,8 @@
 import crypto from 'node:crypto';
-import bcrypt from 'bcrypt';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { getTeacherNameByStudentName } from '../../../../database/posts';
 import { createStudentSession } from '../../../../database/sessions';
-import {
-  getStudentByFirstNameAndLastNameWithGradeCode,
-  getStudentByGradeCode,
-} from '../../../../database/students';
+import { getStudentByGradeCode } from '../../../../database/students';
 import { createSerializedRegisterSessionTokenCookie } from '../../../../utils/cookies';
 
 const studentSchema = z.object({
@@ -54,8 +49,6 @@ export const POST = async (request: NextRequest) => {
   // 2. check if the user already exist
 
   // 2.a compare the username with the database
-  // getStudentByFirstNameAndLastNameWithGradeCode
-  // confirm that the gradecode is valid and it belongs to the student that is making the request
 
   //  this is the main code
   const studentByGradeCode = await getStudentByGradeCode(
@@ -63,8 +56,6 @@ export const POST = async (request: NextRequest) => {
     result.data.firstName,
     result.data.lastName,
   );
-  //  result.data.firstName,
-  //   result.data.lastName,
 
   if (!studentByGradeCode) {
     return NextResponse.json(
@@ -93,17 +84,12 @@ export const POST = async (request: NextRequest) => {
     session.token,
   );
   // - add the new header
-  const teacher = await getTeacherNameByStudentName(
-    studentByGradeCode.firstName,
-    studentByGradeCode.lastName,
-  );
 
   return NextResponse.json(
     {
       student: {
         firstName: studentByGradeCode.firstName,
         lastName: studentByGradeCode.lastName,
-        teacher: teacher,
       },
     },
     {

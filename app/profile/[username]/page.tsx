@@ -1,31 +1,24 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getGradesByUserId } from '../../../database/grades';
-import { getStudents, getStudentsByGradeId } from '../../../database/students';
+// import { getStudents, getStudentsByGradeId } from '../../../database/students';
 import { getUserByUsername } from '../../../database/users';
 import Grades from './Grades';
-
-// import styles from './page.module.scss';
-// import Students from './Students';
 
 type Props = { params: { username: string } };
 
 export default async function UserProfile({ params }: Props) {
   const user = await getUserByUsername(params.username);
   const grade = user && (await getGradesByUserId(user.id));
-  const students = grade && (await getStudentsByGradeId(grade.id));
+  // const students = grade && (await getStudentsByGradeId(grade.id));
 
   if (!user) {
     notFound();
   }
-
+  // const grades = await getGrades();
   return (
-    <main
-      className="bg-indigo-100 flex flex-col items-center justify-content min-h-screen"
-      //   className="
-      //   min-h-screen mb-12 bg-fixed bg-cover bg-center text-lg"
-    >
+    <main className="bg-indigo-100 flex flex-col items-center justify-content min-h-screen">
       <h1 className="flex items-center justify-content font-bold text-4xl md:text-5xl mt-10 mb-10">
         Welcome {user.username}
       </h1>
@@ -43,32 +36,17 @@ export default async function UserProfile({ params }: Props) {
         <Grades userId={user.id} />
 
         <Link
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 my-1 "
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 my-1 ml-auto "
           href={`/profile/${user.username}/student`}
+          style={{ marginTop: '-500px' }}
         >
-          <button className="focus:outline-none mt-19 ">Students Page</button>
+          {' '}
+          <button className="focus:outline-none mt-19 ">
+            {' '}
+            Click To Create Students{' '}
+          </button>
         </Link>
       </div>
     </main>
   );
 }
-// if (!grade) {
-//   notFound();
-// }
-// if (!students) {
-//   notFound();
-// }
-
-// console.log('grade', grade);
-// const student = grade && (await getStudentsByGradeId(grade.id));
-// const grade = await get;
-// const grades = user await getGradesByUserId(user.id);
-// className={styles.main}
-// console.log('grade', grade);
-// let students;
-// if (grade) {
-//   students = await getStudentsByGradeId(grade.id);
-// }
-
-// const students = await getStudents();
-// console.log('students', students);

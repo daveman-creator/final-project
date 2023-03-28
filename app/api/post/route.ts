@@ -30,7 +30,7 @@ export const POST = async (request: NextRequest) => {
     );
   }
   // check if the string is empty
-  // !result.data.userId ||
+
   if (!result.data.title || !result.data.content) {
     return NextResponse.json(
       { errors: [{ message: 'title or content is empty' }] },

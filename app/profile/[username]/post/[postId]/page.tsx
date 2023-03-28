@@ -14,6 +14,7 @@ export async function SinglePostPage(props: Props) {
 }
 
 type Props = {
+  username: any;
   params: {
     postId: string;
   };
@@ -29,20 +30,22 @@ export default async function PostPage(props: Props) {
   }
   // text-lg
   return (
-    <div className="border border-gray-400 rounded-lg p-4 m-4">
+    <div>
       <div className="bg-indigo-100 min-h-screen">
         <h1 className="text-5xl font-bold mb-2 text-center p-6">Posts</h1>
-        <p className="text-4xl font-bold mb-2 p-3 m-4">{singlePost.title}</p>
-        <p className=" text-2xl mb-4 p-3 m-4">{singlePost.content}</p>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 border border-gray-300">
+          <p className="text-4xl font-bold mb-2 p-3 m-4">{singlePost.title}</p>
+          <p className=" text-2xl mb-4 p-3 m-4">{singlePost.content}</p>
 
-        <Comments comments={comments} postId={singlePost.id} />
+          <Comments comments={comments} postId={singlePost.id} />
+        </div>
         <div className="p-2 m-1">
           <Link
             href={`/profile/${props.username}/post`}
-            className="text-blue-500 hover:text-blue-700"
+            className="text-black-500 text-2xl hover:text-blue-700 absolute top-40 left-0  p-4"
           >
             {' '}
-            Back To Post
+            Back
           </Link>
         </div>
       </div>

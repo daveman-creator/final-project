@@ -1,6 +1,4 @@
 import { cache } from 'react';
-import Students from '../app/profile/[username]/Students';
-// import { string } from 'zod';
 import { sql } from './connect';
 
 export type Student = {
@@ -61,27 +59,6 @@ export const getStudentByGradeCode = cache(
     return student;
   },
 );
-// students.grade_id = grades.id
-// export const getStudentByFirstNameAndLastNameWithGradeCode = cache(
-//   async (firstName: string, lastName: string, gradeCode: string) => {
-//     const [student] = await sql<
-//       { id: number; firstName: string; lastName: string; gradeCode: string }[]
-//     >`
-//       SELECT
-//         id,
-//         first_name,
-//         last_name,
-//         grade_code
-//       FROM
-//         students
-//       WHERE
-//         first_name = ${firstName}
-//         AND last_name = ${lastName}
-//         AND grade_id = ${gradeCode}
-//     `;
-//     return student;
-//   },
-// );
 
 export const getStudentsByGradeId = cache(async (gradeId: number) => {
   const students = await sql<Student[]>`
@@ -161,19 +138,5 @@ export const createStudent = cache(
     } else {
       throw new Error('Unable to create student');
     }
-    // return student;
   },
 );
-
-// SELECT
-// students.first_name,
-// students.last_name,
-// grades.grade_code
-
-// FROM
-//   students
-// INNER JOIN
-//   grades ON (
-//     grades.grade_code = 'Thanks5' AND
-//     grades.id = students.grade_id ) AND
-//     Students.first_name = 'Frank';

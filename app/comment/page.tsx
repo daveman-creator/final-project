@@ -1,7 +1,5 @@
 // import './globals.scss';
 import { cookies } from 'next/headers';
-import Image from 'next/image';
-import Link from 'next/link';
 import { getCommentsByPostId } from '../../database/comments';
 import { getPostsByUserId } from '../../database/posts';
 import { getStudentBySessionToken } from '../../database/students';
@@ -38,10 +36,6 @@ export default async function CommentPage(props: Props) {
     ? undefined
     : await getStudentBySessionToken(sessionToken.value);
   console.log(student);
-  // const comments = await getCommentsByPostId(1);
-  // if (!user) {
-  //   notFound();
-  // }
 
   return (
     <main>
@@ -51,20 +45,7 @@ export default async function CommentPage(props: Props) {
       <p>{props.postId}</p>
       <p>{props.content}</p>
       <p>{props.comments}</p>
-      <Comments postId={posts?.id} comments={comments} />
-      {/* <Comments comments={comments} /> */}
-
-      {/* <Comments userId={user?.id} comments={comments} /> */}
-      {/* <p> Post content: {posts?.content}</p> */}
-      {/* <p>{post.title}</p> */}
+      <Comments postId={posts} comments={comments} />
     </main>
   );
 }
-
-// export default function Comments() {
-//   return (
-//     <div>
-//       <h1>Comments</h1>
-//     </div>
-//   );
-// }

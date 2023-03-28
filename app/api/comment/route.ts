@@ -1,14 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import {
-  createComment,
-  getCommentById,
-  getCommentsByPostId,
-} from '../../../database/comments';
+import { createComment } from '../../../database/comments';
 
 const commentSchema = z.object({
-  // userId: z.number(),
-  // studentId: z.number(),
   postId: z.number(),
   content: z.string(),
   // csrfToken: z.string(),
@@ -35,7 +29,7 @@ export const POST = async (request: NextRequest) => {
     );
   }
   // check if the string is empty
-  // !result.data.userId ||
+
   if (!result.data.content) {
     return NextResponse.json(
       { errors: [{ message: ' content is empty' }] },
@@ -44,49 +38,9 @@ export const POST = async (request: NextRequest) => {
   }
   const newComment = await createComment(
     result.data.content,
-    // result.data.studentId,
-    result.data.postId,
 
-    // result.data.userId,
+    result.data.postId,
   );
 
   return NextResponse.json({ comments: newComment });
 };
-
-// export const GET = async (request: NextRequest) => {
-//   const { postId } = request.query;
-
-//   const comments = await getCommentsByPostId(Number(postId));
-
-//   return NextResponse.json({ comments });
-// };
-
-// export async function GET(
-//   request: NextRequest,
-//   { params }: { params: Record<string, string | string[]> },
-// ): Promise<NextResponse<CommentResponseBodyGet>> {
-//   const commentId = Number(params.commentId);
-//   console.log(params);
-
-//   if (!commentId) {
-//     return NextResponse.json(
-//       {
-//         error: 'Comment id is not valid',
-//       },
-//       { status: 400 },
-//     );
-//   }
-
-//   const singleComment = await getCommentById(commentId);
-
-//   if (!singleComment) {
-//     return NextResponse.json(
-//       {
-//         error: 'Comment not found',
-//       },
-//       { status: 404 },
-//     );
-//   }
-
-//   return NextResponse.json({ comment: singleCooment });
-// }

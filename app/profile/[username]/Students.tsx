@@ -2,14 +2,6 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-// import { Student } from '../../../database/students';
-// import { StudentsResponseBody } from '../../api/student/route';
-// import {
-//   StudentResponseBodyDelete,
-//   StudentResponseBodyPut,
-// } from '../../api/students/[studentId]/route';
-import Grades from './Grades';
-import styles from './page.module.scss';
 
 type Student = {
   id: number;
@@ -35,8 +27,7 @@ export default function Students(props: Props) {
   // const [errors, setErrors] = useState<{ message: string }[]>([]);
   // const [gradeId, setGradeId] = useState<number>(0);
   const router = useRouter();
-
-  // const students = await getStudents();
+  console.log('error', error);
 
   return (
     <>
@@ -54,7 +45,7 @@ export default function Students(props: Props) {
               onChange={(event) => setFirstName(event.currentTarget.value)}
             />
           </label>
-          {''}
+
           <label>
             Last Name:
             <input
@@ -116,7 +107,6 @@ export default function Students(props: Props) {
                 }
               />
             )}
-            {''}
 
             {idOnEditMode !== student.id ? (
               student.lastName
@@ -126,7 +116,6 @@ export default function Students(props: Props) {
                 onChange={(event) => setEditLastName(event.currentTarget.value)}
               />
             )}
-            {''}
 
             <button
               onClick={async () => {

@@ -38,6 +38,7 @@ export default function Students(props: Props) {
   // const [errors, setErrors] = useState<{ message: string }[]>([]);
   // const [gradeId, setGradeId] = useState<number>(0);
   const router = useRouter();
+  console.log('error', error);
 
   // const students = await getStudents();
 
@@ -65,7 +66,7 @@ export default function Students(props: Props) {
                   className="border border-gray-400 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </label>
-              {''}
+
               <br />
               <label>
                 Last Name:
@@ -104,12 +105,12 @@ export default function Students(props: Props) {
               >
                 <FontAwesomeIcon icon={faFaceSmile} /> Add Students
               </button>
-              {/* <button
+              <button
                 onClick={() => setShowInput(false)}
                 className="px-2 py-1 bg-gray-300 rounded-md hover:bg-gray-400"
               >
                 X
-              </button> */}
+              </button>
             </form>
           )}
         </div>
@@ -131,7 +132,6 @@ export default function Students(props: Props) {
                     className="border border-gray-300 p-2 rounded-md"
                   />
                 )}
-                {''}
 
                 {idOnEditMode !== student.id ? (
                   student.lastName
@@ -145,7 +145,6 @@ export default function Students(props: Props) {
                   />
                 )}
               </div>
-              {''}
 
               <div className="flex items-center space-x-2">
                 <button
@@ -157,12 +156,6 @@ export default function Students(props: Props) {
                       },
                     );
 
-                    // const data: StudentResponseBodyDelete = await response.json();
-
-                    // if ('errors' in data) {
-                    //   setErrors(data.errors);
-                    //   return;
-                    // }
                     const data = await response.json();
                     if (data.error) {
                       setError(data.error);

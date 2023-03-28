@@ -2,11 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createGrade } from '../../../database/grades';
 
-// import { createStudent, Student } from '../../../database/users';
-
-// import { getUserBySessionToken } from '../../../database/users';
-// import { validateTokenAgainstSecret } from '../../../util/csrf';
-
 const gradeSchema = z.object({
   userId: z.number(),
   imageUrl: z.string(),
@@ -36,7 +31,7 @@ export const POST = async (request: NextRequest) => {
     );
   }
   // check if the string is empty
-  // !result.data.userId ||
+
   if (!result.data.gradeName || !result.data.gradeCode) {
     return NextResponse.json(
       { errors: [{ message: 'gradeName or gradeCode is empty' }] },

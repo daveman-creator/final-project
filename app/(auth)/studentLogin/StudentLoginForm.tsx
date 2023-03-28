@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { StudentsResponseBody } from '../../api/(auth)/studentLogin/route';
-import styles from './page.module.scss';
 
 // props: { returnTo?: string | string[] }
 
@@ -77,7 +76,7 @@ export default function StudentLoginForm(props: {
           alt="Classroom"
         />
         <br />
-        <hr className={styles.hr} />
+        <hr />
         <label>
           FirstName:
           <input
@@ -86,7 +85,7 @@ export default function StudentLoginForm(props: {
             onChange={(event) => setFirstName(event.currentTarget.value)}
           />
         </label>
-        <hr className={styles.hr} />
+        <hr />
 
         <label>
           LastName:
@@ -96,7 +95,7 @@ export default function StudentLoginForm(props: {
             onChange={(event) => setLastName(event.currentTarget.value)}
           />
         </label>
-        <hr className={styles.hr} />
+        <hr />
         <label>
           GradeCode:
           <input
@@ -105,7 +104,7 @@ export default function StudentLoginForm(props: {
             onChange={(event) => setGradeCode(event.currentTarget.value)}
           />
         </label>
-        <hr className={styles.hr} />
+        <hr />
 
         <button className="w-1/2 md:w-1/3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 my-4">
           Login

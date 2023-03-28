@@ -1,12 +1,8 @@
 'use client';
 
-import { FormatColorReset } from '@mui/icons-material';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { comment } from 'postcss';
 import { useState } from 'react';
-import { PostsResponseBody } from '../../../api/post/route';
-import Comments from '../../../comment/Comments';
 import styles from './page.module.scss';
 
 type Post = {
@@ -18,6 +14,7 @@ type Post = {
 // | undefined;
 
 type Props = {
+  username: any;
   posts?: Post[];
   userId?: number;
   // comments?: Comment[];
@@ -37,10 +34,8 @@ export default function Posts(props: Props) {
   // const [editContent, setEditContent] = useState<string>('');
   // const [errors, setErrors] = useState<{ message: string }[]>([]);
   const router = useRouter();
-  // console.log(props);
-  // const { post } = props;
-  // console.log('postId', postId);
-  // console.log('comments', comments)max-w-screen-md mx-auto;
+  console.log('error', error);
+
   return (
     <main>
       <div className=" p-4">
@@ -118,15 +113,13 @@ export default function Posts(props: Props) {
           </form>
         )}
       </div>
-      {/* {Array.isArray(props.posts) &&
-          props.posts.map((post) */}
 
       <div className="space-y-4">
         {props.posts?.map((post) => {
           console.log('Running Javascript here is possible');
 
           return (
-            <div key={post.id} className="border border-gray-300 p-4">
+            <div key={`post-${post.id}`} className="border border-gray-300 p-4">
               <h1 className="text-5xl font-bold text-center">{post.title}</h1>
               <p className="text-gray-600 text-2xl">{post.content}</p>
               {/* <Comments comments={props.comments} postId={post.id} /> */}

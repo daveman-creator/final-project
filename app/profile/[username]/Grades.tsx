@@ -1,9 +1,7 @@
 'use client';
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { GradesResponseBody } from '../../api/grade/route';
+import { useState } from 'react';
 
 export default function Grades(props: { userId: number }) {
   // const router = useRouter;
@@ -11,11 +9,14 @@ export default function Grades(props: { userId: number }) {
   const [gradeCode, setGradeCode] = useState('');
   const [showInput, setShowInput] = useState(false);
   const [error, setError] = useState<{ message: string }[]>([]);
-  const [imageSrc, setImageSrc] = useState<string>();
+  const [imageSrc, setImageSrc] = useState<string>(
+    'https://res.cloudinary.com/dnxlwc15r/image/upload/v1679928402/my-uploads/nny36cuyvqumzeh4ahsm.jpg',
+  );
   const [uploadData, setUploadData] = useState<string>();
   const [imageUrl, setImageUrl] = useState<string>();
   const router = useRouter();
-
+  console.log('error', error);
+  console.log('imageUrl', imageUrl);
   // useEffect(() => {
   //   // Save the image URL to localStorage whenever it changes
   //   if (imageSrc) {
@@ -159,8 +160,8 @@ export default function Grades(props: { userId: number }) {
           <img
             className="my-8 margin-top: -20px"
             src={imageSrc}
-            width="1000"
-            height="800"
+            width="600"
+            height="400"
             alt=""
           />
           {!!imageSrc && !uploadData && (

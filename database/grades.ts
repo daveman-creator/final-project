@@ -22,6 +22,16 @@ type Grade = {
 //   return image;
 // });
 
+export const getGrades = cache(async () => {
+  const grades = await sql<Grade[]>`
+    SELECT
+    *
+    FROM
+      grades
+  `;
+  return grades;
+});
+
 export const getGradesByUserId = cache(async (userId: number) => {
   const [grade] = await sql<
     { id: number; userId: number; gradeName: string; gradeCode: string }[]
@@ -40,9 +50,7 @@ export const getGradesByUserId = cache(async (userId: number) => {
 });
 
 export const getGradeById = cache(async (gradeId: number) => {
-  const [grade] = await sql<
-    { id: number; userId: number; gradeName: string; gradeCode: string }[]
-  >`
+  const [grade] = await sql<Grade[]>`
     SELECT
       id,
       user_id,

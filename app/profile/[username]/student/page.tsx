@@ -22,23 +22,31 @@ export default async function StudentsPage({ params }: Props) {
   if (!user) {
     notFound();
   }
-  // className="flex flex-col items-center justify-center bg-indigo-100  h-screen md:max-w-screen-md lg:max-w-screen-lg"
+
   return (
     <main className="bg-indigo-100 flex flex-col items-center justify-content min-h-screen ">
-      <h1 className="text-3xl text-gray-800 my-8 font-bold">
+      <h1 className="text-3xl text-gray-800 my-8 font-bold mt-20">
         Welcome {user.username}
       </h1>
       <p> Grade Name: {grade?.gradeName}</p>
 
       <Students gradeId={grade?.id} students={students} />
 
-      <Link href={`/profile/${user.username}/post`}>
+      <Link
+        href={`/profile/${user.username}/post`}
+        className="absolute top-30 right-0 m-4"
+      >
         <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">
           {' '}
           Post Page
         </button>
       </Link>
-      <Link href={`/profile/${user.username}`}>Back</Link>
+      <Link
+        href={`/profile/${user.username}`}
+        className="absolute top-30 left-0 m-4"
+      >
+        Back
+      </Link>
     </main>
   );
 }
