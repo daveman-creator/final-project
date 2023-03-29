@@ -9,6 +9,8 @@ import { getStudentBySessionToken } from '../../../../database/students';
 import { getUserBySessionToken } from '../../../../database/users';
 import Posts from './Posts';
 
+// import {Post} from '../../../../database/posts';
+
 export const dynamic = 'force-dynamic';
 
 type Props = { params: { username: string } };
@@ -48,19 +50,19 @@ export default async function PostPage({ params }: Props) {
 
   const grade = user && (await getGradesByUserId(user.id));
 
-  // if (!user && !student) {
+  // if (!user && !student?.firstName && !student?.lastName) {
   //   return <div>Not logged in</div>;
   // }
-  if (!student?.firstName && !student?.lastName) {
-    return <div>Not logged in</div>;
-  }
+  // if (!student) {
+  //   return <div>Not logged in</div>;
+  // }
   const teacher = await getTeacherNameByStudentName(
-    student.firstName,
-    student.lastName,
+    student?.firstName || '',
+    student?.lastName || '',
   );
   // console.log('teacher from post', teacher);
   // let posts: Post[] = [];
-  let posts = null;
+  let posts: any = [];
   console.log('student from post', student);
   console.log('teacher from post', teacher?.userId);
   // if (student && teacher) {

@@ -22,7 +22,7 @@ export default async function UserProfile({ params }: Props) {
       </h1>
 
       <p className="text-lg font-bold mt-">Email: {user.email}</p>
-      <div className="flex flex-row border border-blue-500 p-5">
+      <div className="flex flex-row border border-green-500 p-5">
         <p className=" font-medium mr-4 text-2xl ">
           {' '}
           Grade Name: {grade?.gradeName}
@@ -34,7 +34,7 @@ export default async function UserProfile({ params }: Props) {
         <Grades userId={user.id} />
 
         <Link
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 my-1 ml-auto "
+          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 my-1 ml-auto "
           href={`/profile/${user.username}/student`}
           style={{ marginTop: '-500px' }}
         >

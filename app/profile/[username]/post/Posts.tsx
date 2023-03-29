@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-type Post = {
+export type Post = {
   id: number;
   title: string;
   content: string;
@@ -41,14 +41,13 @@ export default function Posts(props: Props) {
         {!showInput && (
           <button
             onClick={() => setShowInput(true)}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
           >
             Create
           </button>
         )}
         {showInput && (
           <form
-
             onSubmit={async (event) => {
               event.preventDefault();
 
@@ -87,7 +86,7 @@ export default function Posts(props: Props) {
                 Post Content:
                 {/* className="border border-gray-400 rounded px-60 mb-3" */}
                 <textarea
-                  className="block w-full mt-2 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 py-40 "
+                  className="block w-full mt-2 rounded-md border-gray-300 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 py-40 "
                   value={content}
                   name="content"
                   onChange={(event) => setContent(event.currentTarget.value)}
@@ -125,7 +124,7 @@ export default function Posts(props: Props) {
               <div className="flex justify-between items-center">
                 <Link
                   href={`/profile/${props.username}/post/${post.id}`}
-                  className="text-blue-500 hover:text-blue-700"
+                  className="text-green-500 hover:text-green-700"
                 >
                   {' '}
                   Click To Comment on Post

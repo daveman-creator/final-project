@@ -11,8 +11,8 @@ export default function LandingPage() {
             <h1 className="text-5xl font-bold mb-2 text-center">Teacher</h1>
 
             <p className="text-lg mb-6  text-center">
-              Create a class. Post to your class. Click the button below to
-              login
+              Create a class and a class code. Add students and Post to your
+              class . Click the button below to login
             </p>
             <Link href="/login" className="flex justify-center">
               <button className="text-center bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded cursor-pointer">

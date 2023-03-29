@@ -31,7 +31,7 @@ export default function RootLayout({
               width="100"
               height="50"
               alt="logo"
-              className="text-2xl text-black hover:text-blue-500 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer "
+              className="text-2xl text-black hover:text-green-500 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer "
             />
           </Link>
 
@@ -49,7 +49,7 @@ export default function RootLayout({
               <Link href="/landingpage">
                 <FontAwesomeIcon
                   icon={faPersonWalkingArrowRight}
-                  className="text-2xl text-black hover:text-blue-500 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer "
+                  className="text-2xl text-black hover:text-green-500 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer "
                 />
                 get started
               </Link>
@@ -58,7 +58,7 @@ export default function RootLayout({
               <Link href="/logout">
                 <FontAwesomeIcon
                   icon={faRightFromBracket}
-                  className="text-2xl text-black hover:text-blue-500 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer "
+                  className="text-2xl text-black hover:text-green-500 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer "
                 />
                 logout
               </Link>

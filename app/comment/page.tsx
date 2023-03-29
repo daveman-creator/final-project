@@ -15,6 +15,7 @@ type Props = {
   postId: number;
   content: string;
   comments: string;
+  // posts: string;
   // postsId: number | undefined;
   // id: number | undefined;
 };
@@ -49,7 +50,8 @@ export default async function CommentPage(props: Props) {
       <p>{props.postId}</p>
       <p>{props.content}</p>
       <p>{props.comments}</p>
-      <Comments postId={posts} content={comments} />
+      <Comments comments={comments} />
     </main>
   );
 }
+// posts={posts}

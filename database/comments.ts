@@ -1,6 +1,13 @@
 import { cache } from 'react';
 import { sql } from './connect';
 
+export type Comment  =
+ {
+  id: number,
+  content: string,
+
+ }
+
 export const createComment = cache(
   async (
     content: string,

@@ -40,12 +40,12 @@ export default async function PostPage(props: Props) {
           <p className="text-4xl font-bold mb-2 p-3 m-4">{singlePost.title}</p>
           <p className=" text-2xl mb-4 p-3 m-4">{singlePost.content}</p>
 
-          <Comments content={comments} postId={singlePost.id} />
+          <Comments comments={comments} postId={singlePost.id} />
         </div>
         <div className="p-2 m-1">
           <Link
             href={`/profile/${props.username}/post`}
-            className="text-black-500 text-2xl hover:text-blue-700 absolute top-40 left-0  p-4"
+            className="text-black-500 text-2xl hover:text-green-700 absolute top-40 left-0  p-4"
           >
             {' '}
             Back

@@ -3,15 +3,14 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
+// 'https://res.cloudinary.com/dnxlwc15r/image/upload/v1679928402/my-uploads/nny36cuyvqumzeh4ahsm.jpg',
 export default function Grades(props: { userId: number }) {
   // const router = useRouter;
   const [gradeName, setGradeName] = useState('');
   const [gradeCode, setGradeCode] = useState('');
   const [showInput, setShowInput] = useState(false);
   const [error, setError] = useState<{ message: string }[]>([]);
-  const [imageSrc, setImageSrc] = useState<string>(
-    'https://res.cloudinary.com/dnxlwc15r/image/upload/v1679928402/my-uploads/nny36cuyvqumzeh4ahsm.jpg',
-  );
+  const [imageSrc, setImageSrc] = useState<string>();
   const [uploadData, setUploadData] = useState<string>();
   const [imageUrl, setImageUrl] = useState<string>();
   const router = useRouter();
@@ -85,7 +84,7 @@ export default function Grades(props: { userId: number }) {
         {!showInput && (
           <button
             onClick={() => setShowInput(true)}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 my-4"
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 my-4"
           >
             {' '}
             Click To Create
@@ -124,7 +123,7 @@ export default function Grades(props: { userId: number }) {
                 value={gradeName}
                 placeholder="Grade"
                 onChange={(event) => setGradeName(event.currentTarget.value)}
-                className="border border-gray-400 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="border border-gray-400 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-green-500"
               />
             </label>
 
@@ -135,11 +134,11 @@ export default function Grades(props: { userId: number }) {
                 value={gradeCode}
                 placeholder="Grade Code"
                 onChange={(event) => setGradeCode(event.currentTarget.value)}
-                className="border border-gray-400 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="border border-gray-400 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-green-500"
               />
             </label>
 
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 my-4">
+            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 my-4">
               Create
             </button>
 
@@ -167,7 +166,7 @@ export default function Grades(props: { userId: number }) {
           />
           {!!imageSrc && !uploadData && (
             <p>
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 my-0">
+              <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 my-0">
                 Upload Files
               </button>
             </p>
