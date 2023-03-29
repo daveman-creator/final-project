@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-// import { redirect } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import {
   getPostsByUserId,
   getTeacherNameByStudentName,
@@ -34,9 +34,12 @@ export default async function StudentLoginPage(props: Props) {
     : await getUserBySessionToken(sessionToken.value);
   console.log('user', user);
 
+  if (!student) {
+    redirect('/studentLogin');
+  }
   const teacher = await getTeacherNameByStudentName(
-    student?.firstName,
-    student?.lastName,
+    student.firstName,
+    student.lastName,
   );
   console.log('teacher backend', teacher?.username);
 

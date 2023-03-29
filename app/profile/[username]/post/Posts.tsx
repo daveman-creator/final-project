@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import styles from './page.module.scss';
 
 type Post = {
   id: number;
@@ -49,7 +48,7 @@ export default function Posts(props: Props) {
         )}
         {showInput && (
           <form
-            className={styles.form}
+
             onSubmit={async (event) => {
               event.preventDefault();
 

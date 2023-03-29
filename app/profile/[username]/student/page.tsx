@@ -1,13 +1,10 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getGradesByUserId } from '../../../../database/grades';
-import {
-  getStudents,
-  getStudentsByGradeId,
-} from '../../../../database/students';
+import { getStudentsByGradeId } from '../../../../database/students';
 import { getUserByUsername } from '../../../../database/users';
-import Grades from '../Grades';
+// import Grades from '../Grades';
 // import styles from './page.module.scss';
 // import Grades from './Grades';
 import Students from './Students';

@@ -27,24 +27,25 @@ export default function Grades(props: { userId: number }) {
   function handleOnChange(changeEvent: any) {
     const reader = new FileReader();
 
-    reader.onload = function (onLoadEvent) {
-      setImageSrc(onLoadEvent.target.result);
+    reader.onload = function (onLoadEvent: ProgressEvent<FileReader>) {
+      setImageSrc(onLoadEvent.target!.result as string);
       setUploadData(undefined);
     };
 
     reader.readAsDataURL(changeEvent.target.files[0]);
   }
 
-  async function handleOnSubmit(event: any) {
+  async function handleOnSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     const fileInput = Array.from(form.elements).find(
-      ({ name }) => name === 'file',
-    );
-
+      (element) =>
+        element instanceof HTMLInputElement && element.name === 'file',
+    ) as HTMLInputElement;
+    //  ({ name }) => name
     const formData = new FormData();
 
-    for (const file of fileInput.files) {
+    for (const file of fileInput.files || []) {
       formData.append('file', file);
     }
 

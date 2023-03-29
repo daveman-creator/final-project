@@ -15,6 +15,8 @@ export async function SinglePostPage(props: Props) {
 
 type Props = {
   username: any;
+  content: string;
+  comments: string;
   params: {
     postId: string;
   };
@@ -22,12 +24,13 @@ type Props = {
 
 export default async function PostPage(props: Props) {
   const singlePost = await getPostById(parseInt(props.params.postId));
-  const comments = await getCommentsByPostId(singlePost.id);
-  console.log('comments in post', comments);
 
   if (!singlePost) {
     notFound();
   }
+  const comments = await getCommentsByPostId(singlePost.id);
+  console.log('comments in post', comments);
+
   // text-lg
   return (
     <div>
@@ -37,7 +40,7 @@ export default async function PostPage(props: Props) {
           <p className="text-4xl font-bold mb-2 p-3 m-4">{singlePost.title}</p>
           <p className=" text-2xl mb-4 p-3 m-4">{singlePost.content}</p>
 
-          <Comments comments={comments} postId={singlePost.id} />
+          <Comments content={comments} postId={singlePost.id} />
         </div>
         <div className="p-2 m-1">
           <Link

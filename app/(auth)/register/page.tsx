@@ -14,7 +14,8 @@ export default async function RegisterPage(props: Props) {
   console.log('session', session);
   // if I do, redirect to the profile page
   // if (session) {
-  //   // redirect('/login');
+  //   redirect('/login');
+  // }
   //   redirect('/profile/[username]');
   // }
 

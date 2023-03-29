@@ -13,6 +13,17 @@ export const dynamic = 'force-dynamic';
 
 type Props = { params: { username: string } };
 
+// type Post = {
+//   id: number;
+//   title: string;
+//   content: string;
+//   // userId: number;
+//   // studentId: number;
+//   // teacherId: number;
+//   createdAt: string;
+//   updatedAt: string;
+// }  | null ;
+
 export default async function PostPage({ params }: Props) {
   // console.log('params', params);
   const cookieStore = cookies();
@@ -21,24 +32,34 @@ export default async function PostPage({ params }: Props) {
   // 2. validate that session
   // 3. get the user profile matching the session
 
-  const student = !sessionToken?.value
+  if (!sessionToken) {
+    return <div>Not logged in</div>;
+  }
+
+  const student = !sessionToken.value
     ? undefined
     : await getStudentBySessionToken(sessionToken.value);
   // console.log('student', student);
 
-  const user = !sessionToken?.value
+  const user = !sessionToken.value
     ? undefined
     : await getUserBySessionToken(sessionToken.value);
   // console.log('user', user);
 
   const grade = user && (await getGradesByUserId(user.id));
 
+  // if (!user && !student) {
+  //   return <div>Not logged in</div>;
+  // }
+  if (!student?.firstName && !student?.lastName) {
+    return <div>Not logged in</div>;
+  }
   const teacher = await getTeacherNameByStudentName(
-    student?.firstName,
-    student?.lastName,
+    student.firstName,
+    student.lastName,
   );
   // console.log('teacher from post', teacher);
-
+  // let posts: Post[] = [];
   let posts = null;
   console.log('student from post', student);
   console.log('teacher from post', teacher?.userId);

@@ -15,6 +15,8 @@ type Props = {
   postId: number;
   content: string;
   comments: string;
+  // postsId: number | undefined;
+  // id: number | undefined;
 };
 
 export default async function CommentPage(props: Props) {
@@ -25,10 +27,12 @@ export default async function CommentPage(props: Props) {
 
   // 2. validate that session
   // 3. get the user profile matching the session
+
   const user = !sessionToken?.value
     ? undefined
     : await getUserBySessionToken(sessionToken.value);
   console.log(user);
+
   const posts = user && (await getPostsByUserId(user.id));
   console.log('posts from comment ', posts);
   const comments = posts && (await getCommentsByPostId(posts.id));
@@ -45,7 +49,7 @@ export default async function CommentPage(props: Props) {
       <p>{props.postId}</p>
       <p>{props.content}</p>
       <p>{props.comments}</p>
-      <Comments postId={posts} comments={comments} />
+      <Comments postId={posts} content={comments} />
     </main>
   );
 }

@@ -1,7 +1,6 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 
-//  className=" flex flex-col items-center justify-content min-h-screen mb-12 bg-fixed bg-center bg-cover bg-indigo-100  scroll-behavior: smooth"
 export default function LandingPage() {
   return (
     <main className="bg-indigo-100  min-h-screen flex flex-col  items-center ">
@@ -30,7 +29,7 @@ export default function LandingPage() {
               post. Click the button below to login
             </p>
 
-            <Link href="/login" className="flex justify-center">
+            <Link href="/studentLogin" className="flex justify-center">
               <button className="text-center bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded cursor-pointer ">
                 Student
               </button>

@@ -199,12 +199,6 @@ export default function Students(props: Props) {
                         },
                       );
 
-                      // const data: StudentResponseBodyPut = await response.json();
-
-                      // if ('errors' in data) {
-                      //   setErrors(data.errors);
-                      //   return;
-                      // }
                       const data = await response.json();
                       if (data.error) {
                         setError(data.error);
