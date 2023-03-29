@@ -39,12 +39,10 @@ export default async function UserProfile({ params }: Props) {
           style={{ marginTop: '-500px' }}
         >
           {' '}
-          <button className="focus:outline-none mt-19 ">
-            {' '}
-            Click To Create Students{' '}
-          </button>
+          <button className="focus:outline-none mt-19 "> Tap Here </button>
         </Link>
       </div>
     </main>
   );
 }
+// margin: '20px auto 0', display: 'block' position: 'absolute', top: 0, right: 0  position: 'absolute',

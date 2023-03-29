@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
+// import { redirect } from 'next/navigation';
 import { getValidSessionByToken } from '../../../database/sessions';
 import LoginForm from './LoginForm';
 
@@ -11,10 +11,11 @@ export default async function LoginPage(props: Props) {
   const session =
     sessionTokenCookie &&
     (await getValidSessionByToken(sessionTokenCookie.value));
+  console.log('session', session);
   // if I do, redirect to the profile page
-  if (!session) {
-    redirect('/RegisterForm');
-  }
+  // if (!session) {
+  //   redirect('/RegisterForm');
+  // }
   //   // redirect('/profile/[username]');
   // }
 

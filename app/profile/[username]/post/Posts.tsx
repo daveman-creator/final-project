@@ -25,13 +25,7 @@ export default function Posts(props: Props) {
   const [content, setContent] = useState('');
   const [showInput, setShowInput] = useState(false);
   const [error, setError] = useState<string>();
-  // const [comments, setComments] = useState<Comment[]>([]);
-  // const [postId, setPostId] = useState<number>(0);
-  // const [hideInput, setHideInput] = useState(false);
-  // const [idOnEditMode, setIdOnEditMode] = useState<number>();
-  // const [editTitle, setEditTitle] = useState<string>('');
-  // const [editContent, setEditContent] = useState<string>('');
-  // const [errors, setErrors] = useState<{ message: string }[]>([]);
+
   const router = useRouter();
   console.log('error', error);
 
@@ -81,10 +75,10 @@ export default function Posts(props: Props) {
               </label>
             </div>
             <div className="flex flex-col">
-              {/* <button>Create</button> */}
+
               <label className="font-bold text-lg mb-2">
                 Post Content:
-                {/* className="border border-gray-400 rounded px-60 mb-3" */}
+
                 <textarea
                   className="block w-full mt-2 rounded-md border-gray-300 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 py-40 "
                   value={content}
@@ -120,7 +114,7 @@ export default function Posts(props: Props) {
             <div key={`post-${post.id}`} className="border border-gray-300 p-4">
               <h1 className="text-5xl font-bold text-center">{post.title}</h1>
               <p className="text-gray-600 text-2xl">{post.content}</p>
-              {/* <Comments comments={props.comments} postId={post.id} /> */}
+
               <div className="flex justify-between items-center">
                 <Link
                   href={`/profile/${props.username}/post/${post.id}`}
