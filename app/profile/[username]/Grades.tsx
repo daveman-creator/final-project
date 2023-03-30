@@ -79,8 +79,8 @@ export default function Grades(props: { userId: number }) {
   }
 
   return (
-    <main className="bg-indigo-100 ">
-      <div>
+    <main className="bg-indigo-100 py-8 px-4 sm:px-8 md:px-16 lg:px-32 xl:px-40 2xl:px-64">
+      <div className="max-w-lg mx-auto">
         {!showInput && (
           <button
             onClick={() => setShowInput(true)}
@@ -93,7 +93,7 @@ export default function Grades(props: { userId: number }) {
 
         {showInput && (
           <form
-            className="flex items-center gap-4"
+            className="  flex md:flex-row flex-col items-center gap-4"
             onSubmit={async (event) => {
               event.preventDefault();
 
@@ -138,8 +138,14 @@ export default function Grades(props: { userId: number }) {
               />
             </label>
 
-            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 my-4">
+            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 my-4 mt-10">
               Create
+            </button>
+            <button
+              onClick={() => setShowInput(false)}
+              className="px-2 py-1 bg-gray-300 rounded-md hover:bg-gray-400 mt-6"
+            >
+              X
             </button>
 
             <br />
@@ -147,7 +153,7 @@ export default function Grades(props: { userId: number }) {
         )}
       </div>
 
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center mt-8">
         <form
           method="POST"
           onChange={handleOnChange}
@@ -158,7 +164,7 @@ export default function Grades(props: { userId: number }) {
             <input type="file" name="file" />
           </p>
           <img
-            className="my-8 margin-top: -20px"
+            className="my-8 rounded-lg shadow-md"
             src={imageSrc}
             width="600"
             height="400"

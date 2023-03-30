@@ -1,8 +1,5 @@
 import './globals.css';
-import {
-  faPersonWalkingArrowRight,
-  faRightFromBracket,
-} from '@fortawesome/free-solid-svg-icons';
+import { faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -35,29 +32,24 @@ export default function RootLayout({
             />
           </Link>
 
-          <ul className="flex space-x-20">
-            {/* <li className="p-4  ">
-              <Link href="/">
-                <FontAwesomeIcon
-                  icon={faHouseUser}
-                  className="text-2xl text-black hover:text-blue-500 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer "
-                />{' '}
-                Home
-              </Link>
-            </li> */}
+          <ul className="flex space-x-10">
             <li className="p-2  ">
               <Link href="/landingpage">
                 <FontAwesomeIcon
-                  icon={faPersonWalkingArrowRight}
-                  className="text-2xl text-black hover:text-green-500 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer "
+                  icon={faUser}
+                  height="40"
+                  width="40"
+                  className=" text-2xl ml-0 text-black hover:text-green-500 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer "
                 />
-                get started
+                Login
               </Link>
             </li>
             <li className="p-2  ">
               <Link href="/logout">
                 <FontAwesomeIcon
                   icon={faRightFromBracket}
+                  height="40"
+                  width="40"
                   className="text-2xl text-black hover:text-green-500 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer "
                 />
                 logout

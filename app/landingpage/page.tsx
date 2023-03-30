@@ -3,12 +3,12 @@ import Link from 'next/link';
 
 export default function LandingPage() {
   return (
-    <main className="bg-indigo-100  min-h-screen flex flex-col  items-center ">
-      <div className="text-8xl font-bold mb-10 mt-20">Sky App</div>
-      <div className="container mx-auto flex flex-row justify-center items-start mb-10 space-y-10 md:space-y-0 md:space-x-10 mb-10 mt-10">
-        <div className=" w-full md:w-1/2 p-6 border-4 border-gray-400 rounded-lg mb-6 md:mb-0">
+    <main className="bg-indigo-100  min-h-screen flex flex-col m-2 items-center ">
+      <h1 className="text-5xl sm:text-6xl font-bold mb-10 mt-20">Sky App</h1>
+      <div className="container mx-auto flex md:flex-row flex-col  justify-center items-start mb-10 space-y-10 md:space-y-0 md:space-x-10 mb-10 mt-10">
+        <div className=" w-full md:w-1/2 md:p-6 p-2 border-4 border-gray-400 rounded-lg mb-6 md:mb-0">
           <div className="mb-10">
-            <h1 className="text-5xl font-bold mb-2 text-center">Teacher</h1>
+            <h2 className="text-3xl font-bold mb-2 text-center">Teacher</h2>
 
             <p className="text-lg mb-6  text-center">
               Create a class and a class code. Add students and Post to your
@@ -23,7 +23,7 @@ export default function LandingPage() {
         </div>
         <div className="w-full md:w-1/2 p-6 border-4 border-gray-400 rounded-lg mb-6 md:mb-0">
           <div className="mb-10">
-            <h1 className="text-5xl font-bold mb-2 text-center">Student</h1>
+            <h2 className="text-3xl font-bold mb-2 text-center">Student</h2>
             <p className="text-lg mb-6 text-center">
               Keep up to date with your class. Get notified when your teacher
               post. Click the button below to login
@@ -38,7 +38,7 @@ export default function LandingPage() {
         </div>
         <div className="w-full md:w-1/2 p-6 border-4 border-gray-400 rounded-lg mb-6 md:mb-0">
           <div className="mb-10">
-            <h1 className="text-5xl font-bold mb-2 text-center">Parent</h1>
+            <h2 className="text-3xl font-bold mb-2 text-center">Parent</h2>
             <p className="text-lg mb-6 text-center">
               Keep up to date with your child. Get notified when your child
               post. Click the button below to login

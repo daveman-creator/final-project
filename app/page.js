@@ -44,8 +44,7 @@ export default function Home() {
             education.
           </h1>
           <p className="italic font-normal">
-            Check out our App by Registering. Click on the button "get started"
-            above
+            Check out our App by Registering. Click on the button "login" above
           </p>
         </div>
       </div>
