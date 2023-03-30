@@ -1,4 +1,3 @@
-// import './globals.scss';
 import { cookies } from 'next/headers';
 import { getGradesByUserId } from '../../../../database/grades';
 import {
@@ -9,25 +8,11 @@ import { getStudentBySessionToken } from '../../../../database/students';
 import { getUserBySessionToken } from '../../../../database/users';
 import Posts from './Posts';
 
-// import {Post} from '../../../../database/posts';
-
 export const dynamic = 'force-dynamic';
 
 type Props = { params: { username: string } };
 
-// type Post = {
-//   id: number;
-//   title: string;
-//   content: string;
-//   // userId: number;
-//   // studentId: number;
-//   // teacherId: number;
-//   createdAt: string;
-//   updatedAt: string;
-// }  | null ;
-
 export default async function PostPage({ params }: Props) {
-  // console.log('params', params);
   const cookieStore = cookies();
   const sessionToken = cookieStore.get('sessionToken');
 

@@ -31,7 +31,6 @@ export default async function PostPage(props: Props) {
   const comments = await getCommentsByPostId(singlePost.id);
   console.log('comments in post', comments);
 
-  // text-lg
   return (
     <div>
       <div className="bg-indigo-100 min-h-screen p-4">

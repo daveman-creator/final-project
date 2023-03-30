@@ -21,44 +21,44 @@ export default function RootLayout({
         style={{ backgroundColor: '#dbb3b3' }}
         className="overflow-x-hidden overflow-y-auto h-screen"
       >
-        <div className=" flex justify-between  items-center p-4 text-black">
+        <div className=" flex justify-between  items-center p-0 py-0 text-black">
           <Link href="/">
             <Image
               src="/image/Sky.jpg"
-              width="100"
+              width="150"
               height="50"
               alt="logo"
-              className="text-2xl text-black hover:text-green-500 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer "
+              className="text-2xl text-black  transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer w-16 md:w-24 lg:w-32"
             />
           </Link>
 
-          <ul className="flex space-x-10">
-            <li className="p-2  ">
+          <ul className="flex space-x-5  md:flex ">
+            <li className="p-1  ">
               <Link href="/landingpage">
                 <FontAwesomeIcon
                   icon={faUser}
                   height="40"
                   width="40"
-                  className=" text-2xl ml-0 text-black hover:text-green-500 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer "
+                  className=" text-2xl ml-0 text-black hover:text-green-500 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer md:h-8 md:w-8 "
                 />
                 Login
               </Link>
             </li>
-            <li className="p-2  ">
+            <li className="p-1  ">
               <Link href="/logout">
                 <FontAwesomeIcon
                   icon={faRightFromBracket}
                   height="40"
                   width="40"
-                  className="text-2xl text-black hover:text-green-500 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer "
+                  className="text-2xl text-black hover:text-green-500 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer md:h-8 md:w-8"
                 />
                 logout
               </Link>
             </li>
           </ul>
         </div>
+
         {children}
-        {/* </main> */}
       </body>
     </html>
   );
