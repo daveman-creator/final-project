@@ -55,7 +55,7 @@ export default function LoginForm(props: { returnTo?: string | string[] }) {
         <Image
           src="/image/Teacher.webp"
           width="400"
-          height="400"
+          height="350"
           alt="Classroom"
         />
         <br />

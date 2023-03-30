@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getCommentsByPostId } from '../../../../../database/comments';
 import { getPostById } from '../../../../../database/posts';
-import Comments from '../../../../comment/Comments';
+import Comments from './Comments';
 
 export const dynamic = 'force-dynamic';
 
@@ -34,7 +34,7 @@ export default async function PostPage(props: Props) {
   // text-lg
   return (
     <div>
-      <div className="bg-indigo-100 min-h-screen">
+      <div className="bg-indigo-100 min-h-screen p-4">
         <h1 className="text-5xl font-bold mb-2 text-center p-6">Posts</h1>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 border border-gray-300">
           <p className="text-4xl font-bold mb-2 p-3 m-4">{singlePost.title}</p>

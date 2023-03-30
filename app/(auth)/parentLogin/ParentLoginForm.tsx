@@ -8,7 +8,7 @@ import { StudentsResponseBody } from '../../api/(auth)/studentLogin/route';
 
 // props: { returnTo?: string | string[] }
 
-export default function StudentLoginForm(props: {
+export default function ParentLoginForm(props: {
   username: string | undefined;
   returnTo?: string | string[];
 }) {
@@ -18,11 +18,12 @@ export default function StudentLoginForm(props: {
   // const [email, setEmail] = useState('');
   const [errors, setErrors] = useState<{ message: string }[]>([]);
   const router = useRouter();
+  console.log('studentform', props.username);
 
   return (
     <main className="bg-indigo-100">
       <div className="font-bold text-4xl md:text-5xl mt-10 mb-10 text-center">
-        Student
+        Parent
       </div>
       <form
         className="flex flex-col items-center justify-center bg-white rounded-lg shadow-lg p-10 border "
@@ -32,6 +33,7 @@ export default function StudentLoginForm(props: {
           const response = await fetch('/api/studentLogin', {
             method: 'POST',
             body: JSON.stringify({ firstName, lastName, gradeCode }),
+            // email,
           });
 
           const data: StudentsResponseBody = await response.json();
@@ -50,14 +52,20 @@ export default function StudentLoginForm(props: {
             router.push(props.returnTo);
             return;
           }
-
+          // router.push(`/profile/${data.user.username}/post`);
+          // console.log('student login Url', `/profile/${props.username}/post`);
           router.push(`/profile/${props.username}/post`);
+
+          // router.push(`/profile/${firstName}_${lastName}_${gradeCode}/post`);
+
+          // router.push(`/post/${data.user.username}`);
 
           // router.refresh();
           // router.replace(`/profile/${data.user.username}/post`);
           // router.refresh();
         }}
       >
+        {/* <h1>Student</h1> */}
         {errors.map((error) => (
           <div key={`error-${error.message}`}>Error: {error.message}</div>
         ))}

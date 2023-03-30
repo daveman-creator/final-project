@@ -6,7 +6,7 @@ import {
 } from '../../../database/posts';
 import { getStudentBySessionToken } from '../../../database/students';
 import { getUserBySessionToken } from '../../../database/users';
-import StudentLoginForm from './StudentLoginForm';
+import ParentLoginForm from './ParentLoginForm';
 
 console.log('running');
 
@@ -14,7 +14,13 @@ type Props = {
   searchParams: { returnTo?: string | string[]; username: string };
 };
 
-export default async function StudentLoginPage(props: Props) {
+export default async function ParentLoginPage(props: Props) {
+  // check if I have a valid session
+  // const sessionTokenCookie = cookies().get('sessionToken');
+  // const session =
+  //   sessionTokenCookie &&
+  //   (await getValidSessionByToken(sessionTokenCookie.value));
+
   const cookieStore = cookies();
   const sessionToken = cookieStore.get('sessionToken');
 
@@ -65,7 +71,7 @@ export default async function StudentLoginPage(props: Props) {
   console.log('teacher here', user);
   return (
     <div className=" flex flex-col items-center justify-content min-h-screen mb-12 bg-fixed bg-center bg-cover bg-indigo-100">
-      <StudentLoginForm
+      <ParentLoginForm
         returnTo={props.searchParams.returnTo}
         username={teacher?.username}
       />

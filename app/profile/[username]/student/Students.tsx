@@ -118,31 +118,37 @@ export default function Students(props: Props) {
           {props.students?.map((student) => (
             <div
               key={`student-${student.id}`}
-              className="flex items-center space-x-40 justify-between bg-white p-4 rounded-md shadow-md"
+              className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-40 justify-between bg-white p-4 rounded-md shadow-md"
+
+              // className="flex items-center space-x-40 justify-between bg-white p-4 rounded-md shadow-md"className="flex space-x-40"
             >
-              <div className="flex space-x-40">
+              <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-40">
                 {idOnEditMode !== student.id ? (
                   student.firstName
                 ) : (
-                  <input
-                    value={editFirstName}
-                    onChange={(event) =>
-                      setEditFirstName(event.currentTarget.value)
-                    }
-                    className="border border-gray-300 p-2 rounded-md"
-                  />
+                  <div className="flex flex-col space-y-1">
+                    <input
+                      value={editFirstName}
+                      onChange={(event) =>
+                        setEditFirstName(event.currentTarget.value)
+                      }
+                      className="border border-gray-300 p-2 rounded-md"
+                    />
+                  </div>
                 )}
 
                 {idOnEditMode !== student.id ? (
                   student.lastName
                 ) : (
-                  <input
-                    value={editLastName}
-                    onChange={(event) =>
-                      setEditLastName(event.currentTarget.value)
-                    }
-                    className="border border-gray-300 p-2 rounded-md "
-                  />
+                  <div className="flex flex-col space-y-1">
+                    <input
+                      value={editLastName}
+                      onChange={(event) =>
+                        setEditLastName(event.currentTarget.value)
+                      }
+                      className="border border-gray-300 p-2 rounded-md "
+                    />
+                  </div>
                 )}
               </div>
 

@@ -31,6 +31,7 @@ export default function Comments(props: Props) {
   useEffect(() => {
     setComments(props.comments || []);
   }, [props.comments]);
+  // className="sm:w-full md:w-2/3 lg:w-1/2 mx-auto"
   return (
     <main>
       {!showInput && (
