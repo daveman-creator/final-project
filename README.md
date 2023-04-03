@@ -13,32 +13,40 @@ The next phase of the project is to enable the teacher upload files to their cla
 
 ## Main Technonolies Used to Build the App
 
-Next.js Node.js Typescript Tailwind CSS Daisy UI Componenets Postgres Figma DrawSQL Cloudinary
+- Next.js 
+- Node.js 
+- Typescript 
+- Tailwind CSS 
+- Daisy UI Componenets 
+- Postgres 
+- Figma 
+- DrawSQL
+-  Cloudinary
 
 ## The application is fully deployed on:
 
-FLY.IO: Fly.io
-Sign up at Heroku: https://www.fly.io.com/.
-Create a new App
-Choose a name and select the "Europe" Region
-Click "Connect to GitHub"
-Search for your repository and click on "Connect". Click on "Enable Automatic Deploys"
-Go to the Overview tab and click "Configure Add-On"
-Search for "Postgres" and select "FLY.io Postgres"
-Trigger a deploy by pushing your repo to GitHub
+- FLY.IO: Fly.io
+- Sign up at Heroku: https://www.fly.io.com/.
+- Create a new App
+- Choose a name and select the "Europe" Region
+- Click "Connect to GitHub"
+- Search for your repository and click on "Connect". Click on "Enable Automatic Deploys"
+- Go to the Overview tab and click "Configure Add-On"
+- Search for "Postgres" and select "FLY.io Postgres"
+- Trigger a deploy by pushing your repo to GitHub
 
 
 ## Setup instructions
-Clone the repository with git clone <repo>
-Setup the database by downloading and installing PostgreSQL
-Create a user and a database
-Create a new file .env
-Copy the environment variables from .env-example into .env
-Replace the placeholders xxxxx with your username, password and name of database
-Install dotenv-cli with yarn add dotenv-cli
-Run yarn install in your command line
-Run the migrations with yarn migrate up
-Start the server by running yarn dev
+- Clone the repository with git clone <repo>
+- Setup the database by downloading and installing PostgreSQL
+- Create a user and a database
+- Create a new file .env
+- Copy the environment variables from .env-example into .env
+- Replace the placeholders xxxxx with your username, password and name of database
+- Install dotenv-cli with yarn add dotenv-cli
+- Run yarn install in your command line
+- Run the migrations with yarn migrate up
+- Start the server by running yarn dev
 
 
 ## SOME VISUALS
