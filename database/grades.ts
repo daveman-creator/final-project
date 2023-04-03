@@ -10,13 +10,14 @@ type Grade = {
 };
 
 export const getImagesByGradeId = cache(async (gradeId: number) => {
-  const images = await sql<{ id: number; gradeId: number; imageUrl: string }[]>`
+  const [images] = await sql<
+    { id: number; gradeId: number; imageUrl: string }[]
+  >`
     SELECT
       id,
-      grade_id,
       image_url
     FROM
-      images
+      grades
     WHERE
       grade_id = ${gradeId}
   `;
@@ -35,11 +36,18 @@ export const getGrades = cache(async () => {
 
 export const getGradesByUserId = cache(async (userId: number) => {
   const [grade] = await sql<
-    { id: number; userId: number; gradeName: string; gradeCode: string }[]
+    {
+      id: number;
+      userId: number;
+      gradeName: string;
+      gradeCode: string;
+      imageUrl: string;
+    }[]
   >`
     SELECT
       id,
       user_id,
+      image_url,
       grade_name,
       grade_code
     FROM

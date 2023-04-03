@@ -56,7 +56,7 @@ export default function Students(props: Props) {
             </button>
           )}
           {showInput && (
-            <form className="flex items-center gap-4">
+            <form className="flex md:flex-row flex-col  items-center gap-4">
               <label>
                 First Name:
                 <input
@@ -119,8 +119,6 @@ export default function Students(props: Props) {
             <div
               key={`student-${student.id}`}
               className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-40 justify-between bg-white p-4 rounded-md shadow-md"
-
-              // className="flex items-center space-x-40 justify-between bg-white p-4 rounded-md shadow-md"className="flex space-x-40"
             >
               <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-40">
                 {idOnEditMode !== student.id ? (

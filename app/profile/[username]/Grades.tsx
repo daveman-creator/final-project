@@ -3,8 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-// 'https://res.cloudinary.com/dnxlwc15r/image/upload/v1679928402/my-uploads/nny36cuyvqumzeh4ahsm.jpg',
-export default function Grades(props: { userId: number }) {
+export default function Grades(props: { userId: number; imageUrl: string }) {
   // const router = useRouter;
   const [gradeName, setGradeName] = useState('');
   const [gradeCode, setGradeCode] = useState('');
@@ -16,12 +15,6 @@ export default function Grades(props: { userId: number }) {
   const router = useRouter();
   console.log('error', error);
   console.log('imageUrl', imageUrl);
-  // useEffect(() => {
-  //   // Save the image URL to localStorage whenever it changes
-  //   if (imageSrc) {
-  //     localStorage.setItem('image_url', imageSrc);
-  //   }
-  // }, [imageSrc]);
 
   function handleOnChange(changeEvent: any) {
     const reader = new FileReader();
@@ -51,7 +44,7 @@ export default function Grades(props: { userId: number }) {
     formData.append('upload_preset', 'my-uploads');
 
     const data = await fetch(
-      'http://api.cloudinary.com/v1_1/dnxlwc15r/image/upload',
+      'https://api.cloudinary.com/v1_1/dnxlwc15r/image/upload',
       {
         method: 'POST',
         body: formData,
@@ -60,22 +53,6 @@ export default function Grades(props: { userId: number }) {
 
     setImageSrc(data.secure_url);
     setImageUrl(data.secure_url);
-
-    // // Save the image URL to localStorage
-    // localStorage.setItem('image_url', data.secure_url);
-
-    // setUploadData(JSON.stringify(data, null, 2));
-
-    // Save the image URL to your server
-    // const response = await fetch('/api/save-image', {
-    //   method: 'POST',
-    //   body: JSON.stringify({ imageUrl: data.secure_url }),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    // }).then((response) => response.json());
-
-    // setImageUrl(response.imageUrl);
   }
 
   return (
@@ -138,12 +115,13 @@ export default function Grades(props: { userId: number }) {
               />
             </label>
 
-            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 my-4 mt-10">
+            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 my-4 mt-8">
               Create
             </button>
+
             <button
               onClick={() => setShowInput(false)}
-              className="px-2 py-1 bg-gray-300 rounded-md hover:bg-gray-400 mt-6"
+              className="px-2 py-1 bg-gray-300 rounded-md hover:bg-gray-400 mt-4"
             >
               X
             </button>
@@ -165,7 +143,7 @@ export default function Grades(props: { userId: number }) {
           </p>
           <img
             className="my-8 rounded-lg shadow-md"
-            src={imageSrc}
+            src={imageSrc || props.imageUrl}
             width="600"
             height="400"
             alt=""

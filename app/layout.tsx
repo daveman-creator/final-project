@@ -52,7 +52,7 @@ export default function RootLayout({
                   width="40"
                   className="text-2xl text-black hover:text-green-500 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 cursor-pointer md:h-8 md:w-8"
                 />
-                logout
+                Logout
               </Link>
             </li>
           </ul>
