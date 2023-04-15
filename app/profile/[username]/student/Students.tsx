@@ -5,15 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-// import { Student } from '../../../database/students';
-// import { StudentsResponseBody } from '../../api/student/route';
-// import {
-//   StudentResponseBodyDelete,
-//   StudentResponseBodyPut,
-// } from '../../api/students/[studentId]/route';
-// import Grades from './Grades';
-// import styles from './page.module.scss';
-
 type Student = {
   id: number;
   firstName: string;
@@ -34,13 +25,8 @@ export default function Students(props: Props) {
   const [idOnEditMode, setIdOnEditMode] = useState<number>();
   const [editFirstName, setEditFirstName] = useState<string>('');
   const [editLastName, setEditLastName] = useState<string>('');
-  // const [editGradeId, setEditGradeId] = useState<number>();
-  // const [errors, setErrors] = useState<{ message: string }[]>([]);
-  // const [gradeId, setGradeId] = useState<number>(0);
   const router = useRouter();
   console.log('error', error);
-
-  // const students = await getStudents();
 
   return (
     <main className=" bg-indigo-100 ">
@@ -99,7 +85,6 @@ export default function Students(props: Props) {
                   }
 
                   router.refresh();
-                  // setStudents([...students, data.student]);
                 }}
                 className="px-4 py-2 bg-gree-500 text-black rounded-md hover:bg-green-600"
               >
@@ -165,7 +150,7 @@ export default function Students(props: Props) {
                       setError(data.error);
                       return;
                     }
-                    // console.log(data);
+
                     router.refresh();
                   }}
                   className="text-red-500 hover:text-red-600 transition-colors duration-150"
@@ -176,7 +161,7 @@ export default function Students(props: Props) {
                   <button
                     onClick={() => {
                       setIdOnEditMode(student.id);
-                      // setEditGradeId(student.gradeId);
+
                       setEditFirstName(student.firstName);
                       setEditLastName(student.lastName);
                     }}
@@ -195,7 +180,6 @@ export default function Students(props: Props) {
                             'Content-Type': 'application/json',
                           },
                           body: JSON.stringify({
-                            // gradeId: props.editGradeId,.gradeId,
                             gradeId: props.gradeId,
                             firstName: editFirstName,
                             lastName: editLastName,
@@ -209,7 +193,6 @@ export default function Students(props: Props) {
                         return;
                       }
                       setIdOnEditMode(undefined);
-                      // console.log(data);
 
                       router.refresh();
                     }}

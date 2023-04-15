@@ -1,12 +1,8 @@
-// import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getGradesByUserId } from '../../../../database/grades';
 import { getStudentsByGradeId } from '../../../../database/students';
 import { getUserByUsername } from '../../../../database/users';
-// import Grades from '../Grades';
-// import styles from './page.module.scss';
-// import Grades from './Grades';
 import Students from './Students';
 
 type Props = { params: { username: string } };
@@ -38,7 +34,6 @@ export default async function StudentsPage({ params }: Props) {
           </Link>
           <Link
             href={`/profile/${user.username}`}
-            // className="absolute top-30 left-0 m-4"
             className="absolute top-0 left-0 m-4"
           >
             Back

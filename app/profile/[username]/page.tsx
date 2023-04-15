@@ -9,11 +9,11 @@ type Props = { params: { username: string }; imageUrl: string };
 export default async function UserProfile({ params }: Props) {
   const user = await getUserByUsername(params.username);
   const grade = user && (await getGradesByUserId(user.id));
-  // const students = grade && (await getStudentsByGradeId(grade.id));
+
   if (!user) {
     notFound();
   }
-  // className=" font-bold text-4xl  mt-10 mb-10"
+
   return (
     <main className="bg-indigo-100 flex flex-col items-center justify-content min-h-screen ">
       <h1 className="text-3xl text-gray-800 my-8 font-bold mt-20 md:text-5xl flex items-center justify-content">
@@ -46,4 +46,3 @@ export default async function UserProfile({ params }: Props) {
     </main>
   );
 }
-// margin: '20px auto 0', display: 'block' position: 'absolute', top: 0, right: 0  position: 'absolute', style={{ marginTop: '-500px' }}
