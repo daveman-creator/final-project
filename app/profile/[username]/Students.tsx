@@ -23,9 +23,7 @@ export default function Students(props: Props) {
   const [idOnEditMode, setIdOnEditMode] = useState<number>();
   const [editFirstName, setEditFirstName] = useState<string>('');
   const [editLastName, setEditLastName] = useState<string>('');
-  // const [editGradeId, setEditGradeId] = useState<number>();
-  // const [errors, setErrors] = useState<{ message: string }[]>([]);
-  // const [gradeId, setGradeId] = useState<number>(0);
+
   const router = useRouter();
   console.log('error', error);
 
@@ -69,13 +67,6 @@ export default function Students(props: Props) {
                 }),
               });
 
-              // const data: StudentsResponseBody = await response.json();
-
-              // if ('errors' in data) {
-              //   setErrors(data.errors);
-              //   return;
-              // }
-
               const data = await response.json();
               if (data.error) {
                 setError(data.error);
@@ -83,7 +74,6 @@ export default function Students(props: Props) {
               }
 
               router.refresh();
-              // setStudents([...students, data.student]);
             }}
           >
             Add Students
@@ -92,9 +82,6 @@ export default function Students(props: Props) {
       )}
 
       <div>
-        {/* props.students &&
-          props.students.map((student) */}
-
         {props.students?.map((student) => (
           <div key={`student-${student.id}`}>
             {idOnEditMode !== student.id ? (
@@ -123,18 +110,12 @@ export default function Students(props: Props) {
                   method: 'DELETE',
                 });
 
-                // const data: StudentResponseBodyDelete = await response.json();
-
-                // if ('errors' in data) {
-                //   setErrors(data.errors);
-                //   return;
-                // }
                 const data = await response.json();
                 if (data.error) {
                   setError(data.error);
                   return;
                 }
-                // console.log(data);
+
                 router.refresh();
               }}
             >
@@ -144,7 +125,7 @@ export default function Students(props: Props) {
               <button
                 onClick={() => {
                   setIdOnEditMode(student.id);
-                  // setEditGradeId(student.gradeId);
+
                   setEditFirstName(student.firstName);
                   setEditLastName(student.lastName);
                 }}
@@ -160,26 +141,18 @@ export default function Students(props: Props) {
                       'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                      // gradeId: props.editGradeId,.gradeId,
                       gradeId: props.gradeId,
                       firstName: editFirstName,
                       lastName: editLastName,
                     }),
                   });
 
-                  // const data: StudentResponseBodyPut = await response.json();
-
-                  // if ('errors' in data) {
-                  //   setErrors(data.errors);
-                  //   return;
-                  // }
                   const data = await response.json();
                   if (data.error) {
                     setError(data.error);
                     return;
                   }
                   setIdOnEditMode(undefined);
-                  // console.log(data);
 
                   router.refresh();
                 }}
