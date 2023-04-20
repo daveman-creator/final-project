@@ -3,15 +3,12 @@ import bcrypt from 'bcrypt';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createSession } from '../../../../database/sessions';
-import {
-  getUserByUsername,
-  getUserByUsernameWithPasswordHash,
-} from '../../../../database/users';
+import { getUserByUsernameWithPasswordHash } from '../../../../database/users';
 import { createSerializedRegisterSessionTokenCookie } from '../../../../utils/cookies';
 
 const userSchema = z.object({
   username: z.string(),
-  // email: z.string(),
+
   password: z.string(),
 });
 
@@ -38,7 +35,6 @@ export const POST = async (request: NextRequest) => {
 
   // check if the string is empty
   if (!result.data.username || !result.data.password) {
-    // || !result.data.email
     return NextResponse.json(
       { errors: [{ message: 'username or password is empty' }] },
       { status: 400 },
@@ -99,13 +95,4 @@ export const POST = async (request: NextRequest) => {
       headers: { 'Set-Cookie': serializedCookie },
     },
   );
-
-  // const user = await getUserByUsername(result.data.username);
-
-  // if (user) {
-  //   return NextResponse.json(
-  //     { errors: [{ message: 'username is already taken' }] },
-  //     { status: 400 },
-  //   );
-  // }
 };

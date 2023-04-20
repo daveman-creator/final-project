@@ -50,7 +50,6 @@ export const POST = async (request: NextRequest) => {
 
   // 2.a compare the username with the database
 
-  //  this is the main code
   const studentByGradeCode = await getStudentByGradeCode(
     result.data.gradeCode,
     result.data.firstName,
