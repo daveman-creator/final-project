@@ -1,12 +1,10 @@
 import { cache } from 'react';
 import { sql } from './connect';
 
-export type Comment  =
- {
-  id: number,
-  content: string,
-
- }
+export type Comment = {
+  id: number;
+  content: string;
+};
 
 export const createComment = cache(
   async (
@@ -29,7 +27,6 @@ export const createComment = cache(
     return comment;
   },
 );
-// -- ${userId}, ${studentId}
 
 export const getCommentsByPostId = cache(async (postId: number) => {
   const comment = await sql<{ id: number; content: string }[]>`

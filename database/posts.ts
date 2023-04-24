@@ -56,7 +56,6 @@ export const getPostsByUserId = cache(async (userId: number) => {
   console.log('post from querry', post);
   return post;
 });
-//  posts.user_id = ${userId}
 
 export const updatePostById = cache(
   async (id: number, title: string, content: string) => {
@@ -112,7 +111,7 @@ FROM
  INNER JOIN grades ON grades.id = grades.user_id
   INNER JOIN students ON students.grade_id = grades.id
 WHERE
-// posts.id = 12;
+
 
 
   students.user_id = ${currentUserId}
@@ -138,7 +137,7 @@ WHERE
  students.first_name = ${studentFirstName} AND students.last_name = ${studentLastName};
 
   `;
-    console.log('user from querry', user);
+
     return user;
   },
 );
