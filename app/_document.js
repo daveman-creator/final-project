@@ -1,5 +1,25 @@
 // import Document, { Head, Html, Main, NextScript } from 'next/document';
 
+// function MyDocument() {
+//   return (
+//     <Html>
+//       <Head>
+//         <link rel="manifest" href="/manifest.json" />
+//         <link rel="apple-touch-icon" href="/icon.png" />
+//         <meta name="theme-color" content="#317EFB" />
+//       </Head>
+//       <body>
+//         <Main />
+//         <NextScript />
+//       </body>
+//     </Html>
+//   );
+// }
+
+// export default MyDocument;
+
+// import Document, { Head, Html, Main, NextScript } from 'next/document';
+
 // // 41.1K (gzipped: 12.4K) // Path: app\_document.js
 
 // export default class MyDocument extends Document {
