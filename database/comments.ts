@@ -9,8 +9,7 @@ export type Comment = {
 export const createComment = cache(
   async (
     content: string,
-    // userId: number,
-    // studentId: number,
+
     postId: number,
   ) => {
     const [comment] = await sql<{ id: number; content: string }[]>`
